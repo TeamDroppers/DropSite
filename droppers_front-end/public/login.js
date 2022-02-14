@@ -46,7 +46,7 @@ userLoginForm.addEventListener('submit', async (e) => {
 })
 
 userLoginForm.addEventListener('reset', async (e) => {
-  window.location = "/forgot.html";
+  window.location = "./forgot.html";
 })
 
 
