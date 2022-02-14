@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <!-- normalize -->
+    <link rel="stylesheet" href="./normalize.css" />
+    <!-- main  -->
+    <link rel="stylesheet" href="./main.css" />
+
+    <title>Password Reset</title>
+    </head> 
+
+      <body>
+ 
+        <div class="topnav">
+          <a href="./index.html">Home</a>
+          <a href="./login.html">Login</a>
+          <a href="./register.html">Sign Up</a>
+          <a href="./about.html">About</a>
+        </div>
+
+        <div class="container">
+          <form class="single-task-form">
+            <h4>Reset Your Password</h4>
+            <!--
+            <div class="form-control">
+              <label>Task ID</label>
+              <p class="task-edit-id"></p>
+            </div> 
+            -->
+            <div class="form-control">
+              <label for="email">Email</label>
+              <input type="text" name="email" class="email" />
+            </div>
+            <div class="form-control">
+              <label for="password">Password</label>
+              <input type="password" name="password" class="password" />
+            </div>
+            <button id="submit-button" type="submit" class="block btn task-edit-btn">Submit</button>
+            <div class = "forgot-password">
+            </div>
+            <div class="form-alert"></div>
+          </form>
+        </div>
+        <!-- axios -->
+        <script src="./axios.min.js" ></script>
+        <script src="./reset.js"></script> 
+  </body>
+</html>
