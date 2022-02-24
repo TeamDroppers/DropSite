@@ -24,6 +24,9 @@ function Nav() {
                 <Link style={navStyle} to="/shoppingcart">
                     <li>Shopping Cart</li>
                 </Link>
+                <Link style={navStyle} to="/login">
+                    <li>Login</li>
+                </Link>
             </ul>
         </nav>
     ); 
