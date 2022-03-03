@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
+const logo = 'https://media.moddb.com/images/articles/1/147/146977/Care_Package_HUD_icon_MW3.png'
 
 function Nav() {
     
@@ -10,7 +11,7 @@ function Nav() {
 
     return(
         <nav>
-            <h3>Logo</h3>
+            <Link to = "/" ><img  className = "nav--logo" src={logo} /></Link> 
             <ul className="nav-links">
                 <Link style={navStyle} to="/">
                 <li>Home</li>

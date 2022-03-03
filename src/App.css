@@ -11,6 +11,10 @@ nav{
   color: white;
 }
 
+.nav--logo{
+  height: 8vh;
+}
+
 .nav-links {
   width: 40%;
   display: flex;
