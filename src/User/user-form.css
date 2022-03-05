@@ -1,0 +1,137 @@
+.background {
+    top: 0%;
+    z-index: -1;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(64, 75, 78);
+    background-image: url("https://images.squarespace-cdn.com/content/v1/5c819b9b0cf57dfc7b931ec6/1628279478211-EVP8MMQ95Q3S6EWF9DD3/ruchindra-gunasekara-GK8x_XCcDZg-unsplash.jpg");
+    background-size: cover;   
+    backdrop-filter: blur(30px); 
+}
+.user-form{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+  }
+
+  
+.user-form form{
+    position: relative;
+    height: 500px;
+    width: 400px;
+    background-color: rgba(42, 51, 55, 0.719);
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px 4px #44444488;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(20px);
+}
+
+
+
+.user-form h1{
+    color: white;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-shadow: 2px 2px 5px rgba(23, 24, 23, 0.829);
+    font-weight: 600;
+    margin-top: 0;
+}
+  
+.form-control{
+    display: grid;
+      grid-template-columns: 150px 1fr;
+      align-items: center;
+      justify-items: start;
+      gap: 0 1rem;
+      margin-bottom: 0.75rem;
+}
+  
+form {
+    width: 100%;
+    padding: 2rem 2.5rem;
+}
+
+.form-alert{
+    padding: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 5px rgba(23, 24, 23, 0.829);
+}
+
+.submit-fail{
+    font-size: 1.1rem;
+    font-weight: normal;
+    line-height: 2rem;
+    letter-spacing: 1px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+    color:rgb(115, 255, 162);
+}
+
+.user-form .forgot{
+    height: 300px;
+}
+
+form > .logo{
+    height: 20%;
+    margin: 0;
+  }
+  
+.alt-route{
+    width: 100%;
+    position: absolute;
+    bottom: 5%;
+    margin: 0;
+    left: 0;
+}
+
+.alt-route a{
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0 2rem;
+}
+
+.alt-route a:hover{
+    text-shadow: 2px 2px 5px rgba(23, 24, 23, 0.829);
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #F3F3F3;
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+    text-shadow: 3px 3px 2px #333333FF;
+}
+  
+input{
+    width: 90%;
+    padding: 0.375rem 0.75rem;
+    border-radius: 5px;
+    background: var(#E3E3E3);
+    border-color: transparent;
+}
+
+.submit{
+    margin: 4% 0;
+    width: 40%;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 5px 5px 5px 5px;
+    padding: 0.4rem;
+    border-style: none;
+    box-shadow: 5px 5px 20px 4px #22222255;
+}
+
+.submit:hover{
+    cursor: pointer;
+    background: rgba(119, 148, 145, 0.863);
+    color: white;
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.466);
+    box-shadow: 2px 5px 10px 4px #242323c9;
+}
