@@ -29,7 +29,7 @@ const login = async (email) =>{
           }
           document.querySelector('.form-alert').style.display = 'block'
           document.querySelector('.form-alert').innerHTML = 'An email has been sent.'
-          document.querySelector('.form-alert').style.color = "green";
+          document.querySelector('.form-alert').style.color = "white";
           document.querySelector('.submit').hidden = true;
           
         } catch (error) {
