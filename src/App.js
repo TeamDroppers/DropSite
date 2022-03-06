@@ -6,6 +6,7 @@ import Shop from './Shop';
 import Home from './Home';
 import Cart from './Cart';
 import Login from './Login';
+import contactUs from './contactUs';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/shop" component={Shop} />
           <Route path="/shoppingcart" component={Cart}/>
           <Route path="/login" component={Login}/>
+          <Route path="/contactus" component={contactUs}/>
         </Switch>
       </div>
     </Router>
