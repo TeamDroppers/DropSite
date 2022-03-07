@@ -8,14 +8,14 @@ let timeoutID;
 const messageTimeout = ()=>{
   timeoutID = setTimeout(() => {
     document.querySelector('.form-alert').style.display = 'none'
-    document.querySelector('.form-alert').classList.remove('text-success')
   }, 3000)
 }
 
 const register = async (email, password) =>{
     clearTimeout(timeoutID);
     document.querySelector('.form-alert').style.display = 'none'
-    document.querySelector('.form-alert').classList.remove('text-success')
+    document.querySelector('.submit').classList.add('removed')
+    document.querySelector('.loader').classList.remove('removed')
     try {
         const { data } = await axios.post(`https://droppers-node.herokuapp.com/api/v1/auth/register`, {
         email,
@@ -41,6 +41,8 @@ const register = async (email, password) =>{
         document.querySelector('.form-alert').innerHTML = error
         document.querySelector('.form-alert').classList.add('submit-fail');
     }
+    document.querySelector('.submit').classList.remove('removed')
+    document.querySelector('.loader').classList.add('removed')
     messageTimeout();
 }
 
@@ -72,26 +74,27 @@ export default class UserForm extends React.Component {
       render(){
         return (
           <div className = "background">
-                <div className = "user-form">
-                    <form onSubmit={this.handleSubmit}>
-                        <img alt = "logo" className = "logo" src={logo} />
-                        <h1 > Sign Up </h1>
-                        <div className="form-control">
-                            <label>Email</label>
-                            <input type="text" name="email" value={this.state.user.email} onChange={this.handleChange}/>
-                        </div>
-                        <div className="form-control">
-                            <label>Password</label>
-                            <input type="password" name="password" value={this.state.user.password} onChange={this.handleChange}/>
-                        </div>
-                        <button type = "submit" className = "submit">Submit</button>
-                        <div className = "form-alert"></div>
-                        <div className = "alt-route">
-                        <a href = "/login"> Already Have an Account? </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
+              <div className = "user-form">
+                  <form onSubmit={this.handleSubmit}>
+                      <img alt = "logo" className = "logo" src={logo} />
+                      <h1 > Sign Up </h1>
+                      <div className="form-control">
+                          <label>Email</label>
+                          <input type="text" name="email" value={this.state.user.email} onChange={this.handleChange}/>
+                      </div>
+                      <div className="form-control">
+                          <label>Password</label>
+                          <input type="password" name="password" value={this.state.user.password} onChange={this.handleChange}/>
+                      </div>
+                      <button type = "submit" className = "submit">Submit</button>
+                      <div className = "loader removed"></div>
+                      <div className = "form-alert"></div>
+                      <div className = "alt-route">
+                      <a href = "/login"> Already Have an Account? </a>
+                      </div>
+                  </form>
+              </div>
+          </div>
         );
       }
 }

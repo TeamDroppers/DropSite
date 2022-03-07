@@ -8,14 +8,15 @@ let timeoutID;
 const messageTimeout = ()=>{
   timeoutID = setTimeout(() => {
     document.querySelector('.form-alert').style.display = 'none'
-    document.querySelector('.form-alert').classList.remove('text-success')
   }, 3000)
 }
 
 const login = async (email, password) =>{
   clearTimeout(timeoutID);
   document.querySelector('.form-alert').style.display = 'none'
-  document.querySelector('.form-alert').classList.remove('text-success')
+  document.querySelector('.submit').classList.add('removed')
+  document.querySelector('.loader').classList.remove('removed')
+  
   try {
     const { data } = await axios.post(`https://droppers-node.herokuapp.com/api/v1/auth/login`, {
       email,
@@ -43,6 +44,8 @@ const login = async (email, password) =>{
     document.querySelector('.form-alert').innerHTML = error
     document.querySelector('.form-alert').classList.add('submit-fail');
   }
+  document.querySelector('.submit').classList.remove('removed')
+  document.querySelector('.loader').classList.add('removed')
   messageTimeout();
 }
 
@@ -87,6 +90,7 @@ export default class UserForm extends React.Component {
                           <input type="password" name="password" value={this.state.user.password} onChange={this.handleChange}/>
                       </div>
                       <button type = "submit" className = "submit">Submit</button>
+                      <div className = "loader removed"></div>
                       <div className = "form-alert"></div>
                       <div className = "alt-route">
                         <a href = "/register"> Need to Sign Up? </a>

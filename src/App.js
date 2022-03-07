@@ -9,6 +9,10 @@ import Login from './User/Login';
 import Register from './User/Register'
 import Forgot from './User/Forgot'
 import Reset from './User/Reset'
+import Create from './User/Admin/CreateEmployee'
+import EmpRegister from './User/Admin/EmployeeRegister'
+
+
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
@@ -25,6 +29,8 @@ function App() {
           <Route path="/register" component={Register}/>
           <Route path="/forgot" component={Forgot}/>
           <Route path="/reset" component={Reset}/>
+          <Route path="/admin/create-employee" component={Create}/>
+          <Route path="/validate/employee" component={EmpRegister}/>
         </Switch>
       </div>
     </Router>
