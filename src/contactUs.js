@@ -14,6 +14,8 @@ const contactUs = () => {
                     <label for="complaint">Please Specify Your Issue Below:</label>
                     <br></br>
                     <input type="text" id="complaint" name="complaint" size="50"></input> 
+                    <br></br>
+                    <button type="submit">Submit Claim</button>
                 </form>
             </body>
         </div>
