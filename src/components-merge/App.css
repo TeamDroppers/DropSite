@@ -185,3 +185,55 @@ nav{
 .removed{
   display:none;
 }
+
+/** Footer and About us **/
+.about-us-container{
+  margin: 0 auto;
+  display: grid;
+}
+
+.section {
+  /* padding-top: 40px; */
+  padding-bottom: 40px;
+}
+.aboutus {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #e7dada;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.main-heading {
+  color: rgb(204, 18, 18);
+  font-size: 26px;
+}
+
+.underline {
+  height: 04px;
+  width: 4rem;
+  background-color: #f76c2f;
+  margin-bottom: 10px;
+}
+.bg-c-light {
+  background-color: #f2f2f2;
+}
+
+.footer-container{
+  position:relative;
+  width: 100%;
+  margin: 0;
+  bottom: 0;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none !important;
+}
+.footer a:hover {
+  color: gray;
+}
+
+.row{
+  margin-right: 0;
+  padding-top: 1rem;
+}

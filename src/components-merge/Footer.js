@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './Hector.css'
+import './App.css'
 function Footer() {
   return (
     <div className="footer-container">
