@@ -2,10 +2,9 @@ import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from 'react';
 import { commerce } from './lib/commerce';
-import axios from 'axios'
 import { Products, Cart, Checkout, Favorites } from './components';
 import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, EmployeeRegister } from './components-merge';
-import { userInfo } from './components-merge/utilites';
+import { userInfo, updateFavorites } from './components-merge/utilites';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './components-merge/App.css';
@@ -18,6 +17,7 @@ const App = () => {
     const [order, setOrder] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
     const [favorites, setFavorites] = useState([]);
+    const [isLoggedIn, setUserLoggedIn] = useState(false)
 
     const fetchProducts = async () => {
         const { data } = await commerce.products.list();
@@ -30,67 +30,44 @@ const App = () => {
       setCart(await commerce.cart.retrieve());
     }
 
-    const fetchFavorites = async () => {
-      let token = localStorage.getItem('token');
-      if(token){
-        try {
-          const { data } = await axios.get('https://droppers-node.herokuapp.com/api/v1/auth/favorites',{
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if(data)
+    const fetchUser = async () => {
+      await userInfo()
+      .then(async (user)=>{
+        console.log(user)
+        setUserLoggedIn(user.isLoggedIn);
+        let favorites = [];
+        if(user.favorites.length === 0)
           {
-            let favorites = [];
-            for(const favorite of data.favorites){
-              await commerce.products.list({
-                query: favorite.item_id,
-              }).then( (product)=>{
-                  favorites.push(product.data[0]);
-              });
-            }  
-            console.log("Favorites after conversion: ");
-            console.log(favorites);
             setFavorites(favorites);
+            return;
           }
-        }
-        catch(err){
-          console.error(err);
-        }
-      }
-    }
-    const handleAddToFavorites = async (productId, quantity) => {
-      console.log(productId)
-      const user = await userInfo();
-      try{
-        const { data } = await axios.post('https://droppers-node.herokuapp.com/api/v1/auth/favorites',{
-          item_id:productId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-        console.log(data);
-
-        const matchingItems = favorites.filter( favorite => favorite['id'] === productId );
-        if(matchingItems.length > 0){
-          const removeItem = favorites.filter( favorite => favorite['id'] !== productId );
-          setFavorites(removeItem);
-        }
-        else{
+        for(const favorite of user.favorites){
           await commerce.products.list({
-            query: productId,
+            query: favorite.item_id,
           }).then( (product)=>{
               favorites.push(product.data[0]);
           });
-          setFavorites(favorites);
-        }
+        }  
+        console.log("Favorites after conversion: ");
+        console.log(favorites);
+        setFavorites(favorites);
+      })
+    }
+
+    const handleAddToFavorites = async (productId) => {
+      const matchingItems = favorites.filter( favorite => favorite['id'] === productId );
+      let updatedFavorites = favorites
+      if(matchingItems.length > 0){
+        updatedFavorites = updatedFavorites.filter( favorite => favorite['id'] !== productId );
       }
-      catch(err){
-        console.error(err);
+      else{
+          const matchingProduct = products.filter(product => product.id === productId) 
+          console.log(matchingProduct)
+          updatedFavorites.push(matchingProduct[0]);
       }
+      setFavorites(updatedFavorites);
+      updateFavorites(updatedFavorites);
+      return updatedFavorites;
     }
 
     const handleAddToCart = async (productId, quantity) => {
@@ -139,7 +116,7 @@ const App = () => {
     useEffect(() => {
         fetchProducts();
         fetchCart();
-        fetchFavorites();
+        fetchUser();
     }, []);
 
 
@@ -151,6 +128,8 @@ const App = () => {
           <Routes>
             <Route path="/cart" element=
             {<Cart cart={cart} 
+            isLoggedIn={isLoggedIn}
+            favorites={favorites}
             handleUpdateCartQty={handleUpdateCartQty} 
             handleRemoveFromCart={handleRemoveFromCart} 
             handleEmptyCart={handleEmptyCart}
@@ -164,11 +143,13 @@ const App = () => {
             />
             <Route exact path="/" element=
             {<Products products={products}
+            isLoggedIn={isLoggedIn}
+            favorites={favorites}
             onAddToCart={handleAddToCart}
             onAddToFavorites={handleAddToFavorites}/>}
             />
             <Route exact path="/favorites" element=
-            {<Favorites products={favorites}
+            {<Favorites favorites={favorites}
             onAddToCart={handleAddToCart}
             onAddToFavorites={handleAddToFavorites}/>}
             />
@@ -187,28 +168,6 @@ const App = () => {
       </Router>
     );
 
-  // return (
-  //   <Router>
-  //     <div>
-  //       <Navbar totalItems= {cart.total_items} />
-  //       <Routes>
-        
-  //       <Route path="/cart" element=
-  //       {<Cart cart={cart} 
-  //       handleUpdateCartQty={handleUpdateCartQty} 
-  //       handleRemoveFromCart={handleRemoveFromCart} 
-  //       handleEmptyCart={handleEmptyCart}/>} 
-  //       />
-        
-  //       <Route exact path="/" element=
-  //       {<Products products={products}
-  //        onAddToCart={handleAddToCart}/>} 
-  //        />
-
-  //       </Routes>
-  //     </div>
-  //   </Router>
-  // );
 }
 
 export default App;

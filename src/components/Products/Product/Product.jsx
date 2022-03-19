@@ -1,42 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
 import { AddShoppingCart, Favorite } from '@material-ui/icons'
-import {userInfo} from '../../../components-merge/utilites'
 import useStyles from './styles';
+import { updateFavorites } from '../../../components-merge/utilites';
+import '../../item.css'
 
-const Product = ({ product, onAddToCart, onAddToFavorites }) => {
+
+const Product = ({ product, isLoggedIn, isFavorite, onAddToCart, onAddToFavorites }) => {
     const classes = useStyles();
 
-    const [userFavorite, setUserFavorite] = useState(<Empty/>);
+    let favoriteClass = ""
+    if(isFavorite)
+        favoriteClass = "favorite"; 
 
-        useEffect(() => {
-            fetchUser()
-          }, [])
+    let fav_id = product.id + "_favorite"
 
-    const fetchUser = async()=>{
-        await userInfo()              
-        .then(user => {
-            if(user.success)
-                setUserFavorite(<FavoriteButton/>);
-            else
-                setUserFavorite(<Empty/>);
-        })
-    }
-
-    function Empty(){
-        return(
-            <div className="removed"></div>
-        );
-    }
-
-    function FavoriteButton()
+    function internalOnAddToFavorites(productId)
     {
-        return(
-        <IconButton aria-label="Add to Favorites" onClick={() => onAddToFavorites(product.id, 1)}>
-            <Favorite />
-        </IconButton>
-        )
+        document.querySelector(`#${fav_id}`).classList.toggle('favorite');
+        onAddToFavorites(productId);
     }
+
 
   return (
     < Card className={classes.root}>
@@ -56,7 +40,12 @@ const Product = ({ product, onAddToCart, onAddToFavorites }) => {
             <IconButton aria-label="Add to Cart" onClick={() => onAddToCart(product.id, 1)}>
                 <AddShoppingCart />
             </IconButton>
-            {userFavorite}
+            {isLoggedIn &&
+                <IconButton  className={classes.favoriteButton} aria-label="Add to Favorites" onClick={() => internalOnAddToFavorites(product.id)}>
+                    <Favorite id={fav_id} className={favoriteClass}/>
+                </IconButton>
+                }
+           
         </CardActions>
     </Card>
   );

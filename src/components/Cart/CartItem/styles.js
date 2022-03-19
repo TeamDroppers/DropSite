@@ -18,10 +18,12 @@ export default makeStyles(() => ({
     display: 'flex',
     alignItems: 'center',
   },
-  favorite:{
-    position: 'absolute',
-    display: 'flex',
-    right: '5%',
+  addedFavorite:{
+    color: 'red',
   },
+  favoriteButton:{
+    position:'absolute',
+    right: '16px',
+  }
 
 }));

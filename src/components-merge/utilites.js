@@ -32,16 +32,35 @@ const userInfo = async ()=>{
           Authorization: `Bearer ${token}`,
         },
       })
-      console.log(data)
+      // console.log(data)
       data.token = token;
+      data.isLoggedIn = true;
       return data;
     } catch (error) {
       console.log(error);
     }
 
   }
-  const data = {success:false};
+  const data = {success:false, isLoggedIn:false};
   return data;
+}
+
+const updateFavorites = async (productId) =>{
+      const user = await userInfo();
+      try{
+        const { data } = await axios.post('https://droppers-node.herokuapp.com/api/v1/auth/favorites',{
+          item_id:productId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        console.log(data);
+      }
+      catch(err){
+        console.error(err);
+      }
 }
 
 const signUserOut = async ()=>{
@@ -54,4 +73,4 @@ const signUserOut = async ()=>{
 
 }
 
-export{signInStatus, signUserOut, userInfo};
+export{signInStatus, signUserOut, userInfo, updateFavorites};
