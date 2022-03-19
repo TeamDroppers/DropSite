@@ -192,8 +192,8 @@ const App = () => {
             <Route path="/admin/create-employee" element={<Create/>}/>
             <Route path="/validate/employee" element={<EmpRegister/>}/>
           </Routes>
-          <Footer/>
           </div>
+          <Footer/>
         </div>
       </Router>
     );

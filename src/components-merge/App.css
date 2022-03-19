@@ -5,8 +5,7 @@
 
 .main-container{
   position: relative;
-  height: 90vh;
-  min-height: 90vh;
+  min-height: 85vh;
   overflow-y: scroll;
 }
 

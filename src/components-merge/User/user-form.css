@@ -1,7 +1,8 @@
 .background {
     top: 0;
-    position: relative;
-    height: fit-content;
+    min-height: 100%;
+    object-fit: contain;
+    position: absolute;
     width: 100%;
     background-color: rgb(64, 75, 78);
     background-image: url("https://images.squarespace-cdn.com/content/v1/5c819b9b0cf57dfc7b931ec6/1628279478211-EVP8MMQ95Q3S6EWF9DD3/ruchindra-gunasekara-GK8x_XCcDZg-unsplash.jpg");
