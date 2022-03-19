@@ -2,22 +2,12 @@ import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from 'react';
 import { commerce } from './lib/commerce';
+import axios from 'axios'
 import { Products, Cart, Checkout, Favorites } from './components';
+import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, EmployeeRegister } from './components-merge';
 import { userInfo } from './components-merge/utilites';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import axios from 'axios'
-import Nav from './components-merge/Nav';
-import Footer from './components-merge/Footer'
-import About from './components-merge/About';
-import Shop from './components-merge/Shop';
-//import Home from './components-merge/Home';
-import Login from './components-merge/User/Login';
-import Register from './components-merge/User/Register'
-import Forgot from './components-merge/User/Forgot'
-import Reset from './components-merge/User/Reset'
-import Create from './components-merge/User/Admin/CreateEmployee'
-import EmpRegister from './components-merge/User/Admin/EmployeeRegister'
-import Contact from './components-merge/Contact'
+
 import './components-merge/App.css';
 
 
@@ -183,14 +173,13 @@ const App = () => {
             onAddToFavorites={handleAddToFavorites}/>}
             />
             <Route path="/about" element={<About/>}/>
-            <Route path="/shop" element={<Shop/>} />
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/forgot" element={<Forgot/>}/>
             <Route path="/reset" element={<Reset/>}/>
             <Route path="/contact" element={<Contact/>}/>
-            <Route path="/admin/create-employee" element={<Create/>}/>
-            <Route path="/validate/employee" element={<EmpRegister/>}/>
+            <Route path="/admin/create-employee" element={<CreateEmployee/>}/>
+            <Route path="/validate/employee" element={<EmployeeRegister/>}/>
           </Routes>
           </div>
           <Footer/>
