@@ -6,9 +6,6 @@ import CartItem from './CartItem/CartItem';
 
 const Cart = ({ cart, isLoggedIn, favorites, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart, handleAddToFavorites }) => {
     const classes= useStyles();
-
-    console.log("from cart")
-    console.log(favorites);
     const EmptyCart = () =>(
         <Typography variant="subtitle1"> You have no items in your shopping cart!
         <Link to="/"className={classes.link}> Add some!</Link>

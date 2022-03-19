@@ -21,8 +21,6 @@ const App = () => {
 
     const fetchProducts = async () => {
         const { data } = await commerce.products.list();
-        console.log("Products from fetch: ")
-        console.log(data)
         setProducts(data);
     }
 
@@ -48,13 +46,13 @@ const App = () => {
               favorites.push(product.data[0]);
           });
         }  
-        console.log("Favorites after conversion: ");
-        console.log(favorites);
+        // console.log("Favorites after conversion: ");
+        // console.log(favorites);
         setFavorites(favorites);
       })
     }
 
-    const handleAddToFavorites = async (productId) => {
+    const handleAddToFavorites = async (productId) => { 
       const matchingItems = favorites.filter( favorite => favorite['id'] === productId );
       let updatedFavorites = favorites
       if(matchingItems.length > 0){
@@ -66,7 +64,7 @@ const App = () => {
           updatedFavorites.push(matchingProduct[0]);
       }
       setFavorites(updatedFavorites);
-      updateFavorites(updatedFavorites);
+      updateFavorites(productId);
       return updatedFavorites;
     }
 

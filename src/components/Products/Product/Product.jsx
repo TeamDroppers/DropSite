@@ -1,8 +1,7 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
+import { Card, CardMedia, CardContent, CardActions, Typography, IconButton, StylesProvider } from '@material-ui/core';
 import { AddShoppingCart, Favorite } from '@material-ui/icons'
 import useStyles from './styles';
-import { updateFavorites } from '../../../components-merge/utilites';
 import '../../item.css'
 
 
@@ -14,8 +13,9 @@ const Product = ({ product, isLoggedIn, isFavorite, onAddToCart, onAddToFavorite
         favoriteClass = "favorite"; 
 
     let fav_id = product.id + "_favorite"
+    let prod_id = product.id + "_add-cart"
 
-    function internalOnAddToFavorites(productId)
+   function internalOnAddToFavorites(productId)
     {
         document.querySelector(`#${fav_id}`).classList.toggle('favorite');
         onAddToFavorites(productId);
@@ -38,7 +38,8 @@ const Product = ({ product, isLoggedIn, isFavorite, onAddToCart, onAddToFavorite
         </CardContent>
         <CardActions disableSpacing className={classes.cardActions}>
             <IconButton aria-label="Add to Cart" onClick={() => onAddToCart(product.id, 1)}>
-                <AddShoppingCart />
+                <AddShoppingCart id={prod_id}/>
+                <div className = "loader removed"></div>
             </IconButton>
             {isLoggedIn &&
                 <IconButton  className={classes.favoriteButton} aria-label="Add to Favorites" onClick={() => internalOnAddToFavorites(product.id)}>
