@@ -29,6 +29,11 @@ code {
   overflow-y: scroll;
 }
 
+.topbar{
+  min-height: 60px;
+  height: 10vh;
+}
+
 nav{
   position: relative;
   top: 0;
@@ -36,8 +41,7 @@ nav{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  min-height: 10vh;
-  height:10vh;
+  min-height: 100%;
   background: rgba(64, 75, 78, 0.87);
   color: white;
   backdrop-filter: blur(1rem);
@@ -68,11 +72,14 @@ nav{
 }
 
 .nav--logo{
-  position: relative;
-  align-self: flex-start;
-  min-height: 5vh;
-  height:7vh;
+  position: absolute;
+  transform: translate(0%, -50%);
+  -webkit-transform: translate(0%, -50%); /* Chrome, Safari, Opera, Android */
+  -ms-transform: translate(0%, -50%); /* IE 9 */
+  min-height: 30px;
+  height: 70%;
   left: 2%;
+  padding: 0;
 }
 
 .nav-button{
@@ -151,7 +158,7 @@ nav{
   
   .topbar .dropdown-control{
     position:absolute;
-    right: 5%;
+    right: 2%;
     width: 60px;
     height: 50px;
     min-height: 50px;
