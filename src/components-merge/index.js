@@ -7,5 +7,7 @@ export { default as Login } from './User/Login';
 export { default as Register } from './User/Register';
 export { default as Reset } from './User/Reset';
 export { default as CreateEmployee } from './User/Admin/CreateEmployee';
+export { default as ModifyEmployee } from './User/Admin/ModifyEmployee';
+
 export { default as EmployeeRegister } from './User/Admin/EmployeeRegister';
 

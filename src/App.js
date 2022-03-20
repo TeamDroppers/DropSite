@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from 'react';
 import { commerce } from './lib/commerce';
 import { Products, Cart, Checkout, Favorites } from './components';
-import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, EmployeeRegister } from './components-merge';
+import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, ModifyEmployee, EmployeeRegister } from './components-merge';
 import { userInfo, updateFavorites } from './components-merge/utilites';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -158,6 +158,7 @@ const App = () => {
             <Route path="/reset" element={<Reset/>}/>
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/admin/create-employee" element={<CreateEmployee/>}/>
+            <Route path="/admin/modify-employee" element={<ModifyEmployee/>}/>
             <Route path="/validate/employee" element={<EmployeeRegister/>}/>
           </Routes>
           </div>

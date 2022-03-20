@@ -171,7 +171,7 @@ export default class UserForm extends React.Component {
                       <div className = "loader removed"></div>
                       <div className = "form-alert"></div>
                       <div className = "alt-route">
-                      <a href = "/login"> Modify Existing Employee </a>
+                      <a href = "/admin/modify-employee"> Modify Existing Employee </a>
                       </div>
                   </form>
               </div>
