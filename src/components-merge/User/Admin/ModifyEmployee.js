@@ -244,7 +244,7 @@ function ModifyEmployee(){
                     <div className = "loader removed"></div>
                     <div className = "form-alert"></div>
                     <div className = "alt-route">
-                    <a href = "/admin/create-employee"> Create New Employee </a>
+                        <a href = "/admin/create-employee"> Create New Employee </a>
                     </div>
                 </form>
             </div>
