@@ -1,44 +1,43 @@
+//Navbar used for the homepage
+
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Badge, Typography } from "@material-ui/core";
-import { ShoppingCart } from '@material-ui/icons';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import logo from '../homepage/assets/google.png';
+import './navbar.css';
 
-import logo from '../../assets/logo.png';
-import useStyles from './styles';
-
-const Navbar = ( {totalItems} ) => {
-    const classes = useStyles();
-    const location = useLocation();
-
-    if(location)
-
-
-  return (
-    <>
-        <AppBar position='fixed' className={classes.appBar} color='inherit'>
-            <Toolbar>
-                <Typography component={Link} to="/" variant="h6" className={classes.title} color="inherit">
-                    <img src={logo} alt="Drop Site" height="25px" className={classes.image} />
-                    Drop Site
-                </Typography>
-                <div className={classes.grow} />
-                {location.pathname === '/' && (
-                <div className={classes.button}>
-                    <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
-                        <Badge badgeContent={totalItems} color="secondary">
-                            <ShoppingCart />
-                        </Badge>
-                    </IconButton> 
-                    
-                </div>
-                )}
-            </Toolbar>                                                  
-        </AppBar>
-
-      
-    </>
-  );
-}
-
+const Navbar = () => (
+  <div className="droppers__navbar bg-dark">
+    {/* <div className="droppers__navbar-links"> */}
+    <div className="droppers__navbar-links_logo">
+      <img src={logo} alt="logo" />
+    </div>
+    <div className="droppers__navbar-links_container">
+      <Link to="/">
+        <button type="button">Home</button>
+      </Link>
+      <Link to="/about">
+        <button type="button">What is Droppers?</button>
+      </Link>
+      <Link to="/store">
+        <button type="button">Store</button>
+      </Link>
+      <Link to="/contact">
+        <button type="button">Contact Us</button>
+      </Link>
+      <Link to="/blog">
+        <button type="button">More</button>
+      </Link>
+    </div>
+    {/* </div> */}
+    <div className="droppers__navbar-sign">
+      <Link to="/login">
+        <button type="button">Sign in</button>
+      </Link>
+      <Link to="/register">
+        <button type="button">Sign up</button>
+      </Link>
+    </div>
+  </div>
+);
 
 export default Navbar;

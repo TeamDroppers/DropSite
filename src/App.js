@@ -1,17 +1,19 @@
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import useStyles from './components/Store/Cart/styles';
 import React, { useState, useEffect } from 'react';
-import { commerce } from './lib/commerce';
-import { Products, Cart, Checkout, Favorites } from './components';
-import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, ModifyEmployee, EmployeeRegister } from './components-merge';
-import { userInfo, updateFavorites } from './components-merge/utilites';
+import { commerce } from './components/lib/commerce';
+import { Products, Cart, Checkout, Favorites, ProductById } from './components';
+import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, ModifyEmployee, EmployeeRegister } from './components';
+import { userInfo, updateFavorites } from './components/utilites';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import './components-merge/App.css';
+import Homepage from './components/homepage/Homepage'
+import './components/App.css';
 
 
 
 const App = () => {
+
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState({});
     const [order, setOrder] = useState({});
@@ -34,7 +36,7 @@ const App = () => {
         console.log(user)
         setUserLoggedIn(user.isLoggedIn);
         let favorites = [];
-        if(user.favorites.length === 0)
+        if(user.favorites && user.favorites.length === 0)
           {
             setFavorites(favorites);
             return;
@@ -46,8 +48,6 @@ const App = () => {
               favorites.push(product.data[0]);
           });
         }  
-        // console.log("Favorites after conversion: ");
-        // console.log(favorites);
         setFavorites(favorites);
       })
     }
@@ -113,17 +113,19 @@ const App = () => {
 
     useEffect(() => {
         fetchProducts();
-        fetchCart();
         fetchUser();
+        fetchCart();
     }, []);
 
+    const classes = useStyles();
 
     return (
       <Router>
         <div className="App">
-          <Nav totalItems= {cart.total_items} />
           <div className="main-container">
+          <Nav totalItems= {cart.total_items} />
           <Routes>
+            <Route exact path="/" element= {<Homepage/>}/>
             <Route path="/cart" element=
             {<Cart cart={cart} 
             isLoggedIn={isLoggedIn}
@@ -139,12 +141,29 @@ const App = () => {
             onCaptureCheckout={handleCaptureCheckout}
             error={errorMessage}/>}
             />
-            <Route exact path="/" element=
-            {<Products products={products}
+            <Route exact path="/store" element=
+            {
+            <>
+            <h1 className={classes.title}>Store</h1>
+            <Products products={products}
             isLoggedIn={isLoggedIn}
             favorites={favorites}
             onAddToCart={handleAddToCart}
-            onAddToFavorites={handleAddToFavorites}/>}
+            onAddToFavorites={handleAddToFavorites}/>
+            </>
+            }
+            />
+            <Route exact path="/product" element=
+            {
+            <>
+            <ProductById commerce={commerce}
+            products={products}
+            isLoggedIn={isLoggedIn}
+            favorites={favorites}
+            onAddToCart={handleAddToCart}
+            onAddToFavorites={handleAddToFavorites}/>
+            </>
+            }
             />
             <Route exact path="/favorites" element=
             {<Favorites favorites={favorites}

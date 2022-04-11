@@ -5,7 +5,7 @@
 .removed{
     display: none;
 }
-
+/* 
 .loader {
     display: inline-block;
     margin: 5% 0;
@@ -16,7 +16,16 @@
     background: transparent;
     width: 16px;
     height: 16px;
-    -webkit-animation: spin .75s linear infinite; /* Safari */
+    -webkit-animation: spin .75s linear infinite; 
     animation: spin .75s linear infinite;
-  }
+  } */
   
+  /* p{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 90%;
+    text-align: center;
+    margin: 0 auto;
+    align-self: center;
+  } */
