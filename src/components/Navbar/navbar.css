@@ -9,7 +9,7 @@
     align-items: center;
     flex-wrap:wrap;
     gap: 1rem;
-    padding: 2rem 1rem;
+    padding: 2rem 5%;
     font-size: 11px;
     text-align: center;
 }
@@ -87,11 +87,11 @@
 
 .droppers__navbar-sign button,
 .droppers__navbar-menu_container button {
-   padding: 0.5rem 1rem;
-    Color: white;
-    background: #033e26;
+    padding: 0.5rem 1rem;
+    color:rgb(36, 41, 43);
+    background: white;
     font-family: var(--font-family);
-    font-weight: 500;    
+    font-weight: 600;    
     line-height: 1rem;
     border-radius: 5px;
     border: 0;
@@ -103,9 +103,9 @@
 .droppers__navbar-sign button:hover,
 .droppers__navbar-menu_container button:hover 
 {
-    background: white;
+    background: #229977;
     box-shadow: 3px 3px 20px 3px #92b3a955;
-    color: black;
+    color: white;
 }
 
 @media only screen and (max-width: 1000px) {

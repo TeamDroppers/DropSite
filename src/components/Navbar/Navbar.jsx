@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import logo from '../homepage/assets/google.png';
 import './navbar.css';
 
-const Navbar = () => (
+function Navbar({user, logout}){
+  console.log(user);
+  return(
   <div className="droppers__navbar bg-dark">
     {/* <div className="droppers__navbar-links"> */}
     <div className="droppers__navbar-links_logo">
@@ -30,14 +32,24 @@ const Navbar = () => (
     </div>
     {/* </div> */}
     <div className="droppers__navbar-sign">
+      {!user.isLoggedIn &&
+      <>
       <Link to="/login">
         <button type="button">Sign in</button>
       </Link>
       <Link to="/register">
         <button type="button">Sign up</button>
       </Link>
+      </>
+      }
+      {user.isLoggedIn && 
+        <>
+        <button type="button" onClick={logout}>Sign out</button>
+        </>
+      }
     </div>
   </div>
-);
+  );
+};
 
 export default Navbar;

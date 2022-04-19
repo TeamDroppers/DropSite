@@ -50,11 +50,15 @@ function Nav({totalItems, user}){
             <div className="removed"></div>
         );
         }
+
+    const logout = ()=>{
+        signUserOut().then( ()=>{ window.location = "/"} )
+    }
     
     function LoginButton() {
         return (
             <button className = "nav-button" onClick = {()=>{ if(window.location.pathname !== "/login") window.location = "/login"}}>
-            Login
+            Sign in
             </button>
         );
         }
@@ -62,10 +66,8 @@ function Nav({totalItems, user}){
     function LogoutButton() {
     return (
         <button className = "nav-button" 
-        onClick = {()=>{
-        signUserOut().then( ()=>{ window.location = "/"} )
-        }}>
-        Logout
+        onClick = {logout}>
+        Sign out
         </button>
     );
     }
@@ -182,7 +184,7 @@ function Nav({totalItems, user}){
     return(
         <>
         {location.pathname !== '/' && <Navbar/>}
-        {location.pathname === '/' && <HomeNavbar/>}
+        {location.pathname === '/' && <HomeNavbar user={user} logout={logout} />}
         </>
     ); 
     
