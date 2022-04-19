@@ -129,7 +129,8 @@ const App = () => {
           <Routes>
             <Route exact path="/" element= {<Homepage/>}/>
             <Route path="/cart" element=
-            {<Cart cart={cart} 
+            {<Cart cart={cart}
+            products={products} 
             user={user}
             favorites={favorites}
             handleUpdateCartQty={handleUpdateCartQty} 

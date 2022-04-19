@@ -5,7 +5,7 @@ import useStyles from './styles';
 
 const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, onAddToFavorites }) => {
     const classes = useStyles();
-
+    console.log(item);
     let favoriteClass = ""
     if(isFavorite)
         favoriteClass = "favorite"; 
@@ -32,7 +32,6 @@ const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, o
                 <Button type="button" size="small" onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}>+</Button>    
             </div>
                 <Button  className={classes.removeButton} variant="contained" type="button" color="secondary" onClick={() => onRemoveFromCart(item.id)}>Remove</Button> 
-                             
                     {user.isLoggedIn &&
                     <div className={classes.favoriteButton}>  
                         <IconButton aria-label="Add to Favorites" onClick={() => internalOnAddToFavorites(item.product_id)}>
