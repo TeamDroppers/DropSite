@@ -3,9 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import useStyles from './components/Store/Cart/styles';
 import React, { useState, useEffect } from 'react';
 import { commerce } from './components/lib/commerce';
-import { Products, Cart, Checkout, Favorites, ProductById } from './components';
+import { Products, Cart, Checkout, Favorites, ProductById, ModifyProduct } from './components';
 import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, ModifyEmployee, EmployeeRegister } from './components';
-import { userInfo, updateFavorites } from './components/utilites';
+import { userInfo, updateFavorites, changeProductPrice } from './components/utilites';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './components/homepage/Homepage'
 import './components/App.css';
@@ -17,9 +17,9 @@ const App = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState({});
     const [order, setOrder] = useState({});
+    const [user, setUser] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
     const [favorites, setFavorites] = useState([]);
-    const [isLoggedIn, setUserLoggedIn] = useState(false)
 
     const fetchProducts = async () => {
         const { data } = await commerce.products.list();
@@ -31,25 +31,23 @@ const App = () => {
     }
 
     const fetchUser = async () => {
+      if(!products || products.length === 0) return;
+      let initialFavorites = [];
+      console.log('products are\n' + products);
       await userInfo()
       .then(async (user)=>{
         console.log(user)
-        setUserLoggedIn(user.isLoggedIn);
-        let favorites = [];
-        if(user.favorites && user.favorites.length === 0)
-          {
-            setFavorites(favorites);
-            return;
-          }
-        for(const favorite of user.favorites){
-          await commerce.products.list({
-            query: favorite.item_id,
-          }).then( (product)=>{
-              favorites.push(product.data[0]);
-          });
-        }  
-        setFavorites(favorites);
+        setUser(user);
+        user.favorites.forEach(favorite => {
+          const matchingProduct = (products.filter(product => product['id'] === favorite.item_id))
+          if(matchingProduct.length > 0) 
+            initialFavorites.push(matchingProduct[0]);
+        });
+      console.log('initialFavorites are\n' + initialFavorites);
+
       })
+
+      setFavorites(initialFavorites);
     }
 
     const handleAddToFavorites = async (productId) => { 
@@ -113,9 +111,12 @@ const App = () => {
 
     useEffect(() => {
         fetchProducts();
-        fetchUser();
         fetchCart();
     }, []);
+
+    useEffect(()=>{
+      fetchUser();
+    }, [products])
 
     const classes = useStyles();
 
@@ -123,12 +124,13 @@ const App = () => {
       <Router>
         <div className="App">
           <div className="main-container">
-          <Nav totalItems= {cart.total_items} />
+          <Nav totalItems= {cart.total_items}
+          user={user}/>
           <Routes>
             <Route exact path="/" element= {<Homepage/>}/>
             <Route path="/cart" element=
             {<Cart cart={cart} 
-            isLoggedIn={isLoggedIn}
+            user={user}
             favorites={favorites}
             handleUpdateCartQty={handleUpdateCartQty} 
             handleRemoveFromCart={handleRemoveFromCart} 
@@ -146,7 +148,7 @@ const App = () => {
             <>
             <h1 className={classes.title}>Store</h1>
             <Products products={products}
-            isLoggedIn={isLoggedIn}
+            user={user}
             favorites={favorites}
             onAddToCart={handleAddToCart}
             onAddToFavorites={handleAddToFavorites}/>
@@ -158,10 +160,20 @@ const App = () => {
             <>
             <ProductById commerce={commerce}
             products={products}
-            isLoggedIn={isLoggedIn}
+            user={user}
             favorites={favorites}
             onAddToCart={handleAddToCart}
             onAddToFavorites={handleAddToFavorites}/>
+            </>
+            }
+            />
+            <Route exact path="/modify-product" element=
+            {
+            <>
+            <ModifyProduct commerce={commerce}
+            products={products}
+            user={user}
+            changePrice={changeProductPrice}/>
             </>
             }
             />

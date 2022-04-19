@@ -3,7 +3,7 @@ import { Typography, Button, Card, CardContent, CardMedia, IconButton } from '@m
 import { Favorite } from '@material-ui/icons'
 import useStyles from './styles';
 
-const CartItem = ({ item, isLoggedIn, isFavorite, onUpdateCartQty, onRemoveFromCart, onAddToFavorites }) => {
+const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, onAddToFavorites }) => {
     const classes = useStyles();
 
     let favoriteClass = ""
@@ -33,7 +33,7 @@ const CartItem = ({ item, isLoggedIn, isFavorite, onUpdateCartQty, onRemoveFromC
             </div>
                 <Button  className={classes.removeButton} variant="contained" type="button" color="secondary" onClick={() => onRemoveFromCart(item.id)}>Remove</Button> 
                              
-                    {isLoggedIn &&
+                    {user.isLoggedIn &&
                     <div className={classes.favoriteButton}>  
                         <IconButton aria-label="Add to Favorites" onClick={() => internalOnAddToFavorites(item.product_id)}>
                             <Favorite id={fav_id} className={favoriteClass}/>

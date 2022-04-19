@@ -17,7 +17,7 @@ const navStyle = {
     color: 'white'
 }
 
-function Nav({totalItems}){
+function Nav({totalItems, user}){
 
     // const classes = useStyles();
     const location = useLocation();
@@ -28,23 +28,21 @@ function Nav({totalItems}){
 
     useEffect(() => {
         fetchUser()
-        }, [])
+        }, [user])
 
     const fetchUser = async()=>{
-        await userInfo()              
-        .then(user => {
-            if(user.success){                
-                setLoginButton(<LogoutButton/>);
-                setNavUserFavorite(<NavFavoriteButton/>)
-                setSideUserFavorite(<SideFavoriteButton/>)
-                if(user.role >= 2)
-                    setUserLinks(<UserLinks/>)
-              } else {
-                setLoginButton(<LoginButton/>);
-                setNavUserFavorite(<Empty/>);
-                setSideUserFavorite(<Empty/>);
-              }
-        })
+        if(user.isLoggedIn){                
+            setLoginButton(<LogoutButton/>);
+            setNavUserFavorite(<NavFavoriteButton/>)
+            setSideUserFavorite(<SideFavoriteButton/>)
+            if(user.role >= 2)
+                setUserLinks(<UserLinks/>)
+        } 
+        else {
+            setLoginButton(<LoginButton/>);
+            setNavUserFavorite(<Empty/>);
+            setSideUserFavorite(<Empty/>);
+        }
     }
         
     function Empty(){

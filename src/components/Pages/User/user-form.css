@@ -61,7 +61,7 @@ form {
     color: white;
     font-size: 1rem;
     font-weight: 600;
-    text-shadow: 2px 2px 5px rgba(23, 24, 23, 0.829);
+    text-shadow: 2px 2px 5px #33333333;
 }
 
 form > .logo{

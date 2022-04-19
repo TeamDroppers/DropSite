@@ -9,6 +9,7 @@ export default makeStyles(() => ({
     flex:'2',
   },
   media: {
+    position:'relative',
     paddingTop: '40%', // 16:9
     '&:hover': {
       cursor:'pointer'
@@ -37,4 +38,28 @@ export default makeStyles(() => ({
       cursor:'pointer'
    },
   },
+  noQuantity:{
+    position: 'absolute',
+    top: '0',
+    textAlign: 'center',
+    width: '100%',
+    background: '#CCCCCCAA',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyIontent: 'center',
+  },
+  noQuantityText:{
+    fontWeight: '700',
+    color: '#4FA',
+    background: '#FFF6',
+    padding: '3rem',
+    border: '1px solid transparent',
+    minWidth:  '100%',
+    letterSpacing: '0.06rem',
+    position: 'relative',
+    textShadow: '3px 3px 6px #757575',
+    margin: '10% auto',
+    textAlign: 'center',
+  }
 }));

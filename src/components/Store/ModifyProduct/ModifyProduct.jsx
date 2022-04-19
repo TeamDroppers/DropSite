@@ -6,7 +6,7 @@ import useStyles from './styles';
 
 
 
-const Products = ({ commerce, products, user, favorites, onAddToCart, onAddToFavorites }) => {
+const Products = ({ commerce, products, isLoggedIn, changePrice}) => {
     const classes = useStyles();
     const [product, setProduct] = useState({});
     const [productDisplay, setProductDisplay] = useState(<></>);
@@ -16,12 +16,8 @@ const Products = ({ commerce, products, user, favorites, onAddToCart, onAddToFav
         const params = window.location.search;
         const paramID = new URLSearchParams(params).get('productID');
         fetchProduct(paramID);
-    }, [products, favorites]);
+    }, [products]);
     
-    if (!product) { // checking for empty url here.
-        return null;
-    }
-
     const fetchProduct = async (paramID) => {
         try{
             const filterProducts = new Promise((resolve, reject) => {
@@ -42,10 +38,14 @@ const Products = ({ commerce, products, user, favorites, onAddToCart, onAddToFav
         }
     }
 
+    if (!product) { // checking for empty url here.
+        return null;
+    }
+
     function ProductDisplay ({product}){
         return(
                 <Grid className={classes.productContainer} item key={product.id} xs={10} sm={8} md={5} lg={4} xl={3}>
-                    <Product className={classes.product} product={product} user={user} isFavorite={(favorites.filter(favorite => favorite['id'] === product.id)).length > 0} onAddToCart={onAddToCart} onAddToFavorites={onAddToFavorites} />
+                    <Product className={classes.product} product={product} isLoggedIn={isLoggedIn} changePrice={changePrice}/>
                 </Grid>
         )
     }

@@ -1,5 +1,6 @@
 export { default as Products } from './Store/Products/Products';
 export { default as ProductById } from './Store/ProductById/ProductById';
+export { default as ModifyProduct } from './Store/ModifyProduct/ModifyProduct';
 export { default as Cart } from './Store/Cart/Cart';
 export { default as Checkout } from './Store/CheckoutForm/Checkout/Checkout';
 export { default as Favorites } from './Store/Favorites/Favorites'

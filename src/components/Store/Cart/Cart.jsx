@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import useStyles from './styles';
 import CartItem from './CartItem/CartItem';
 
-const Cart = ({ cart, isLoggedIn, favorites, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart, handleAddToFavorites }) => {
+const Cart = ({ cart, user, favorites, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart, handleAddToFavorites }) => {
     const classes= useStyles();
     const EmptyCart = () =>(
         <Typography variant="subtitle1"> You have no items in your shopping cart!
@@ -21,7 +21,7 @@ const Cart = ({ cart, isLoggedIn, favorites, handleUpdateCartQty, handleRemoveFr
             <Grid container spacing={3} justifyContent = 'space-evenly'>
                 {cart.line_items.map((item) =>(
                     <Grid className={classes.product} item xs={10} sm={6} md={5} lg={4} xl={3} key={item.id}>
-                        <CartItem item={item} isLoggedIn={isLoggedIn} isFavorite={(favorites.filter(favorite => favorite['id'] === item.product_id)).length > 0} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} onAddToFavorites={handleAddToFavorites}/>
+                        <CartItem item={item} user={user} isFavorite={(favorites.filter(favorite => favorite['id'] === item.product_id)).length > 0} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} onAddToFavorites={handleAddToFavorites}/>
                     </Grid>
                 ))}
             </Grid>

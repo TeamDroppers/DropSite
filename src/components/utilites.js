@@ -73,4 +73,35 @@ const signUserOut = async ()=>{
 
 }
 
-export{signInStatus, signUserOut, userInfo, updateFavorites};
+const changeProductPrice = async(update)=>{
+  const url = new URL(
+      `https://api.chec.io/v1/products/${update.id}`
+  );
+  
+  var data = JSON.stringify(update.info);
+
+  var config = {
+    method: 'put',
+    url: url,
+    headers: { 
+      'X-Authorization': `${process.env.REACT_APP_CHEC_SECRET_KEY}`, 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+  let updatedProduct = {};
+  await axios(config)
+  .then(function (response) {
+    updatedProduct = response.data;
+    updatedProduct.success = true;
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+    updatedProduct.success = false;
+  });
+  return updatedProduct;
+
+}
+
+export{signInStatus, signUserOut, userInfo, updateFavorites, changeProductPrice};

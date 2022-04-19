@@ -8,7 +8,13 @@ const FavoriteItem = ({ favorite, onAddToCart, onAddToFavorites }) => {
     const classes = useStyles();
   return (
     < Card className={classes.root}>
-        <CardMedia className={classes.media} image={favorite.image.url} title={favorite.name} onClick={()=>{window.location = `/product/?productID=${favorite.id}`}}/>
+        <CardMedia className={classes.media} image={favorite.image.url} title={favorite.name} onClick={()=>{window.location = `/product/?productID=${favorite.id}`}}>
+            { favorite.inventory.available === 0 && <div className={classes.noQuantity}>
+                <h1 className={classes.noQuantityText}>
+                    Out of Stock
+                </h1>
+            </div>}
+        </CardMedia>
         <CardContent className={classes.cardContent}>
             <Typography variant="h4">{favorite.name}</Typography>
             <Typography className={classes.productPrice} variant = "h5" onClick={()=>{window.location = `/product/?productID=${favorite.id}`}}>
@@ -16,9 +22,11 @@ const FavoriteItem = ({ favorite, onAddToCart, onAddToFavorites }) => {
             </Typography> 
         </CardContent>
         <CardActions disableSpacing className={classes.cardActions}>
+            {favorite.inventory.available > 0 && 
             <IconButton aria-label="Add to Cart" onClick={() => onAddToCart(favorite.id, 1)}>
                 <AddShoppingCart />
             </IconButton>
+            }
             <IconButton className={classes.favorite} aria-label="Add to Favorites" onClick={() => onAddToFavorites(favorite.id)}>
                 <Favorite />
             </IconButton>
