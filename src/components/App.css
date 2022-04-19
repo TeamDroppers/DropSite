@@ -84,6 +84,7 @@ code {
   /* align-items: center; */
   align-self: flex-start;
   margin-left: 2rem;
+  min-width: 5%;
 }
 
 .nav--logo > *{

@@ -21,6 +21,7 @@ function Nav({totalItems, user}){
 
     // const classes = useStyles();
     const location = useLocation();
+    const [isLoading, setLoading] = useState(true);
     const [userLink, setUserLinks] = useState(<Empty/>);
     const [userNavFavorite, setNavUserFavorite] = useState(<Empty/>);
     const [userSideFavorite, setSideUserFavorite] = useState(<Empty/>);
@@ -31,6 +32,9 @@ function Nav({totalItems, user}){
         }, [user])
 
     const fetchUser = async()=>{
+        if(user && user.success === true || user.success === false)
+            setLoading(false);
+
         if(user.isLoggedIn){                
             setLoginButton(<LogoutButton/>);
             setNavUserFavorite(<NavFavoriteButton/>)
@@ -49,7 +53,7 @@ function Nav({totalItems, user}){
         return(
             <div className="removed"></div>
         );
-        }
+    }
 
     const logout = ()=>{
         signUserOut().then( ()=>{ window.location = "/"} )
@@ -100,6 +104,14 @@ function Nav({totalItems, user}){
         )
     }
     
+    if(isLoading)
+    {
+        return(
+            <>
+            </>
+        )
+    }
+
     function Navbar()
     {
         return(

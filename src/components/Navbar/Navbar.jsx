@@ -32,7 +32,7 @@ function Navbar({user, logout}){
     </div>
     {/* </div> */}
     <div className="droppers__navbar-sign">
-      {!user.isLoggedIn &&
+      {user && !user.isLoggedIn &&
       <>
       <Link to="/login">
         <button type="button">Sign in</button>
@@ -42,7 +42,7 @@ function Navbar({user, logout}){
       </Link>
       </>
       }
-      {user.isLoggedIn && 
+      {user && user.isLoggedIn && 
         <>
         <button type="button" onClick={logout}>Sign out</button>
         </>
