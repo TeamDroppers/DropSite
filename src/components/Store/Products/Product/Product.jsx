@@ -10,6 +10,7 @@ const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites, adm
     const [customerRender, setCustomerRender] = useState(<></>);
     const [guestRender, setGuestRender] = useState(<></>);
 
+    console.log(product);
     useEffect(() => {
         setupView();//window.requestAnimationFrame(()=>setTimeout(setupView, 0));
     }, [adminView, guestView, customerView]);

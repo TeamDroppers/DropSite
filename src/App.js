@@ -4,8 +4,8 @@ import useStyles from './components/Store/Cart/styles';
 import React, { useState, useEffect } from 'react';
 import { commerce } from './components/lib/commerce';
 import { Products, Cart, Checkout, Favorites, ProductById, ModifyProduct } from './components';
-import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, ModifyEmployee, EmployeeRegister } from './components';
-import { userInfo, updateFavorites, changeProductPrice } from './components/utilites';
+import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, ModifyEmployee, EmployeeRegister, Profile, Orders } from './components';
+import { userInfo, updateFavorites, changeProductPrice, getOrders } from './components/utilites';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './components/homepage/Homepage'
 import './components/App.css';
@@ -192,6 +192,9 @@ const App = () => {
             <Route path="/admin/create-employee" element={<CreateEmployee/>}/>
             <Route path="/admin/modify-employee" element={<ModifyEmployee/>}/>
             <Route path="/validate/employee" element={<EmployeeRegister/>}/>
+            <Route path="profile" element={<Profile user={user}/>}/>
+            <Route path="orders" element={<Orders user={user} getOrders={getOrders}/>}/>
+
           </Routes>
           </div>
           <Footer/>

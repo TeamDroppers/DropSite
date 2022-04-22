@@ -22,30 +22,31 @@ function Nav({totalItems, user}){
     // const classes = useStyles();
     const location = useLocation();
     const [isLoading, setLoading] = useState(true);
-    const [userLink, setUserLinks] = useState(<Empty/>);
-    const [userNavFavorite, setNavUserFavorite] = useState(<Empty/>);
-    const [userSideFavorite, setSideUserFavorite] = useState(<Empty/>);
-    const [loginControl, setLoginButton] = useState(<LoginButton/>)
+    const [userLink, setUserLinks] = useState(<></>);
+    const [userNavFavorite, setNavUserFavorite] = useState(<></>);
+    const [userSideFavorite, setSideUserFavorite] = useState(<></>);
+    const [loginControl, setLoginButton] = useState(<></>)
 
     useEffect(() => {
         fetchUser()
         }, [user])
 
     const fetchUser = async()=>{
-        if(user && user.success === true || user.success === false)
-            setLoading(false);
+        if(user && user.success === true || user.success === false){
+                setLoading(false);
 
-        if(user.isLoggedIn){                
-            setLoginButton(<LogoutButton/>);
-            setNavUserFavorite(<NavFavoriteButton/>)
-            setSideUserFavorite(<SideFavoriteButton/>)
-            if(user.role >= 2)
-                setUserLinks(<UserLinks/>)
-        } 
-        else {
-            setLoginButton(<LoginButton/>);
-            setNavUserFavorite(<Empty/>);
-            setSideUserFavorite(<Empty/>);
+            if(user.isLoggedIn){                
+                setLoginButton(<LogoutButton/>);
+                setNavUserFavorite(<NavFavoriteButton/>)
+                setSideUserFavorite(<SideFavoriteButton/>)
+                if(user.role >= 2)
+                    setUserLinks(<UserLinks/>)
+            } 
+            else {
+                setLoginButton(<LoginButton/>);
+                setNavUserFavorite(<Empty/>);
+                setSideUserFavorite(<Empty/>);
+            }
         }
     }
         
@@ -104,14 +105,6 @@ function Nav({totalItems, user}){
         )
     }
     
-    if(isLoading)
-    {
-        return(
-            <>
-            </>
-        )
-    }
-
     function Navbar()
     {
         return(

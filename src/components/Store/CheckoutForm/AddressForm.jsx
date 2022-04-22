@@ -55,12 +55,30 @@ const AddressForm = ({ checkoutToken, next }) => {
 
     }, [shippingSubdivision])
     
+    const handleSubmit = (event)=>{
+        event.preventDefault();
+        const data = {
+            firstname: event.target.elements[0].value, //firstname
+            lastname: event.target.elements[1].value, //lastname
+            email: event.target.elements[3].value, //email
+            name: event.target.elements[0].value + " " + event.target.elements[1].value, //firstname concatinated with last name
+            street: event.target.elements[2].value, //address
+            town_city: event.target.elements[4].value, //city
+            county_state: shippingSubdivision,
+            postal_zip_code: event.target.elements[5].value, //zip code
+            country: shippingCountry,
+            shippingOption: shippingOption,
+        }
+        next({...data})
+        console.log(data);
+    }
     
     return (
     <>  
         <Typography variant="h6" gutterBottom>Shipping Address</Typography>
         <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit((data) => next({ ...data , shippingCountry, shippingSubdivision, shippingOption}))}>
+            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={methods.handleSubmit((data) => { console.log(data); next({ ...data , shippingCountry, shippingSubdivision, shippingOption})} )}> */}
                 <Grid container spacing={3}>
                     <FormInput name='firstName' label='First Name'/>
                     <FormInput name='lastName' label='Last Name'/>

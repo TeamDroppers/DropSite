@@ -36,6 +36,8 @@ code {
 .main-container{
   position: relative;
   min-height: 85vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .topbar{

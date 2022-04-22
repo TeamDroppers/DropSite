@@ -104,4 +104,40 @@ const changeProductPrice = async(update)=>{
 
 }
 
-export{signInStatus, signUserOut, userInfo, updateFavorites, changeProductPrice};
+const getOrders = async(email)=>{
+  const url = new URL(
+    "https://api.chec.io/v1/orders"
+);
+
+let params = {
+    "limit": "5",
+    "query":email,
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
+const config = {
+  method: 'GET',
+  url: url,
+  headers: { 
+    'X-Authorization': `${process.env.REACT_APP_CHEC_SECRET_KEY}`, 
+    'Content-Type': 'application/json'
+  },
+};
+
+
+let orders = {};
+await axios(config)
+.then(function (response) {
+  orders = response.data; 
+  orders.success = true; 
+})
+.catch(function (error) {
+  console.log(error);
+  orders.success = false;
+});
+return orders;
+
+}
+
+export{signInStatus, signUserOut, userInfo, updateFavorites, changeProductPrice, getOrders};
