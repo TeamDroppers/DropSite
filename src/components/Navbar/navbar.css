@@ -80,7 +80,7 @@
 
 .droppers__navbar-links_container button:hover
 {
-    background: #229977;
+    background: #224499;
     box-shadow: 3px 3px 20px 3px #92b3a955;
     color: white;
 }
@@ -103,7 +103,7 @@
 .droppers__navbar-sign button:hover,
 .droppers__navbar-menu_container button:hover 
 {
-    background: #229977;
+    background: #224499;
     box-shadow: 3px 3px 20px 3px #92b3a955;
     color: white;
 }

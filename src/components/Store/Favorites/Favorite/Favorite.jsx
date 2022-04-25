@@ -8,7 +8,7 @@ const FavoriteItem = ({ favorite, onAddToCart, onAddToFavorites }) => {
     const classes = useStyles();
   return (
     < Card className={classes.root}>
-        <CardMedia className={classes.media} image={favorite.image.url} title={favorite.name} onClick={()=>{window.location = `/product/?productID=${favorite.id}`}}>
+        <CardMedia className={classes.media} image={favorite.image.url} title={favorite.name} onClick={()=>{window.location = `/product/?ref=${favorite.id}`}}>
             { favorite.inventory.available === 0 && <div className={classes.noQuantity}>
                 <h1 className={classes.noQuantityText}>
                     Out of Stock
@@ -17,7 +17,7 @@ const FavoriteItem = ({ favorite, onAddToCart, onAddToFavorites }) => {
         </CardMedia>
         <CardContent className={classes.cardContent}>
             <Typography variant="h4">{favorite.name}</Typography>
-            <Typography className={classes.productPrice} variant = "h5" onClick={()=>{window.location = `/product/?productID=${favorite.id}`}}>
+            <Typography className={classes.productPrice} variant = "h5" onClick={()=>{window.location = `/product/?ref=${favorite.id}`}}>
                 {favorite.price.formatted_with_symbol}
             </Typography> 
         </CardContent>

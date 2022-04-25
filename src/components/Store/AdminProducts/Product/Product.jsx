@@ -4,8 +4,16 @@ import { AddShoppingCart, Favorite } from '@material-ui/icons'
 import useStyles from './styles';
 import '../../../item.css'
 
-const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites}) => {
+const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites, adminView, guestView, customerView}) => {
     const classes = useStyles();
+    const [adminRender, setAdminRender] = useState(<></>);
+    const [customerRender, setCustomerRender] = useState(<></>);
+    const [guestRender, setGuestRender] = useState(<></>);
+
+    // console.log(product);
+    useEffect(() => {
+        setupView();//window.requestAnimationFrame(()=>setTimeout(setupView, 0));
+    }, [adminView, guestView, customerView]);
 
     let favoriteClass = ""
     if(isFavorite)
@@ -13,6 +21,16 @@ const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites}) =>
 
     let fav_id = product.id + "_favorite"
     let prod_id = product.id + "_add-cart"
+
+    const setupView = ()=>{
+        (customerView || guestView) ? setAdminRender(<></>) : setAdminRender(<AdminView/>);
+        (guestView) ? setGuestRender(<GuestView/>) : setGuestRender(<></>);
+        if(customerView){
+            setCustomerRender(<CustomerView/>)  ;
+            setGuestRender(<GuestView/>) ;
+        } 
+        else setCustomerRender(<></>);
+    }
 
     function internalOnAddToFavorites(productId)
     {
@@ -23,8 +41,9 @@ const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites}) =>
     function UserView(){
         return(
             <>
-                <GuestView/>
-                <CustomerView/>
+                {adminRender}
+                {guestRender}
+                {customerRender} 
             </>
         );
     }
@@ -53,6 +72,16 @@ const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites}) =>
             }
             </>
         )
+    }
+
+    function AdminView(){
+        return(
+            <>
+            {user.role >=2 && 
+            <button id="adminView" className = {classes.modifyButton} onClick={()=>{window.location = `/modify-product/?ref=${product.id}`}}>Modify</button>
+            }
+            </>
+        );
     }
 
   return (

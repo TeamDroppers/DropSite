@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { signUserOut, userInfo } from '../utilites';
 import { IconButton, Badge } from "@material-ui/core";
 import { ShoppingCart, Favorite } from '@material-ui/icons';
+import PersonIcon from '@mui/icons-material/Person';
 import HomeNavbar from './Navbar';
 // import $ from 'jquery'
 
@@ -79,7 +80,7 @@ function Nav({totalItems, user}){
 
     function UserLinks(){
         return(
-        <Link style={navStyle} to="/admin/create-employee">
+        <Link style={navStyle} to="/admin">
         <li className = "nav-link">Admin</li>
         </Link>
         );
@@ -139,6 +140,11 @@ function Nav({totalItems, user}){
                         {userNavFavorite}
                     </>
                     )}
+                    <IconButton component={Link} to="/profile" aria-label="User profile" color="inherit">
+                        <Badge className = "nav-link" color="secondary">
+                            <PersonIcon />
+                        </Badge>
+                    </IconButton> 
                     {loginControl}
                 </ul>
                 <div className ="dropdown-control" id = "dropdown-open">
@@ -177,6 +183,9 @@ function Nav({totalItems, user}){
                         <li className = "nav-link">Shopping Cart</li>
                     </Link>
                     {userSideFavorite}
+                    <Link style={navStyle} to="/profile">
+                        <li className = "nav-link">Profile</li>
+                    </Link>
                     {userLink}
                     {loginControl}
                 </ul>

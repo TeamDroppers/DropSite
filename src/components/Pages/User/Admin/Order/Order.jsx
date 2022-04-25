@@ -1,13 +1,15 @@
 import React from 'react';
-import '../orders.css'
+import '../../Orders/orders.css'
 import { Link } from 'react-router-dom';
 
 const Order = ({ order }) => {
     const symbol = order.currency.symbol;
     const total = order.tax.amount.raw + order.order.total.raw
     const symbol_total = symbol + '' + total;
+
   return (
       <>
+      <h6 className='customer-email'>Customer: {order.customer.email}</h6>
     <table role="table" className="order">
         <thead role="rolegorup">
             <tr role="row">

@@ -42,7 +42,6 @@ code {
 
 .topbar{
   min-height: 60px;
-  min-width: 400px;
   height: 10vh;
   position: relative;
   top: 0;
@@ -50,6 +49,7 @@ code {
   display: flex;
   justify-content: space-evenly; 
   align-items: center;
+  z-index: 15;
 }
 
 .nav-links {
@@ -73,7 +73,7 @@ code {
 }
 
 .nav-link:hover{
-  background: #229977;
+  background: #224499;
   box-shadow: 3px 3px 20px 3px #92b3a955;
   color: white;
   border-radius: 5px;
@@ -121,7 +121,7 @@ code {
 .nav-button:hover{   
   cursor:pointer;
   text-shadow: none;
-  background: #229977;
+  background: #224499;
   color: white;
   box-shadow: 5px 5px 10px 4px #18181888;
 }
@@ -133,7 +133,7 @@ code {
 }
 
 .sidemenu{
-  z-index: 10;
+  z-index: 15;
   display: flex;
   align-items: center;
   justify-content: center;

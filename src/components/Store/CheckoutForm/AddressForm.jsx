@@ -7,7 +7,7 @@ import { commerce } from '../../lib/commerce';
 
 import FormInput from './CustomTextField';
 
-const AddressForm = ({ checkoutToken, next }) => {
+const AddressForm = ({ checkoutToken, setCheckoutToken, next }) => {
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState('');
     const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -37,7 +37,7 @@ const AddressForm = ({ checkoutToken, next }) => {
 
     const fetchShippingOptions = async (checkoutTokenId, country, region = null) => {
         const options = await commerce.checkout.getShippingOptions(checkoutTokenId, { country, region });
-
+        console.log(options)
         setShippingOptions(options);
         setShippingOption(options[0].id);
     }
@@ -69,8 +69,29 @@ const AddressForm = ({ checkoutToken, next }) => {
             country: shippingCountry,
             shippingOption: shippingOption,
         }
-        next({...data})
-        console.log(data);
+        commerce.checkout.checkShippingOption(checkoutToken.id, {
+            shipping_option_id: shippingOption,
+            country: shippingCountry,
+            region: shippingSubdivision,
+        })
+        .then((ship)=>{
+            ship.id = checkoutToken.id
+            setCheckoutToken(ship);
+            console.log(ship)
+            commerce.checkout.setTaxZone(checkoutToken.id, {
+                country: shippingCountry,
+                region: shippingSubdivision,
+                postal_zip_code: event.target.elements[5].value,
+            })
+            .then((tax)=>{
+                tax.shipping = ship.shipping;
+                setCheckoutToken(tax);
+                console.log(tax);
+                next({...data})
+                console.log(data);
+            })
+        })
+
     }
     
     return (

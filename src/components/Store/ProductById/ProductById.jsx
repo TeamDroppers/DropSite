@@ -14,7 +14,7 @@ const Products = ({ commerce, products, user, favorites, onAddToCart, onAddToFav
 
     useEffect(() => {
         const params = window.location.search;
-        const paramID = new URLSearchParams(params).get('productID');
+        const paramID = new URLSearchParams(params).get('ref');
         fetchProduct(paramID);
     }, [products, favorites]);
     

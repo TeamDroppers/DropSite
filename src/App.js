@@ -4,8 +4,8 @@ import useStyles from './components/Store/Cart/styles';
 import React, { useState, useEffect } from 'react';
 import { commerce } from './components/lib/commerce';
 import { Products, Cart, Checkout, Favorites, ProductById, ModifyProduct } from './components';
-import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, ModifyEmployee, EmployeeRegister, Profile, Orders } from './components';
-import { userInfo, updateFavorites, changeProductPrice, getOrders } from './components/utilites';
+import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, ModifyEmployee, EmployeeRegister, Profile, Orders, AdminProducts, AdminOrders, AdminLanding } from './components';
+import { userInfo, updateFavorites, changeProductPrice, getOrders, getOrdersWithParams, updateUser } from './components/utilites';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './components/homepage/Homepage'
 import './components/App.css';
@@ -33,17 +33,17 @@ const App = () => {
     const fetchUser = async () => {
       if(!products || products.length === 0) return;
       let initialFavorites = [];
-      console.log('products are\n' + products);
+      // console.log('products are\n' + products);
       await userInfo()
       .then(async (user)=>{
-        console.log(user)
+        // console.log(user)
         setUser(user);
         user.favorites.forEach(favorite => {
           const matchingProduct = (products.filter(product => product['id'] === favorite.item_id))
           if(matchingProduct.length > 0) 
             initialFavorites.push(matchingProduct[0]);
         });
-      console.log('initialFavorites are\n' + initialFavorites);
+      // console.log('initialFavorites are\n' + initialFavorites);
 
       })
 
@@ -58,7 +58,7 @@ const App = () => {
       }
       else{
           const matchingProduct = products.filter(product => product.id === productId) 
-          console.log(matchingProduct)
+          // console.log(matchingProduct)
           updatedFavorites.push(matchingProduct[0]);
       }
       setFavorites(updatedFavorites);
@@ -142,7 +142,9 @@ const App = () => {
             cart={cart} 
             order={order} 
             onCaptureCheckout={handleCaptureCheckout}
-            error={errorMessage}/>}
+            error={errorMessage}
+            user={user}/>}
+            
             />
             <Route exact path="/store" element=
             {
@@ -189,12 +191,16 @@ const App = () => {
             <Route path="/forgot" element={<Forgot/>}/>
             <Route path="/reset" element={<Reset/>}/>
             <Route path="/contact" element={<Contact/>}/>
+            <Route path="/profile" element={<Profile user={user} getOrdersWithParams={getOrdersWithParams} isOrderById={false} updateUser={updateUser} setUser={setUser}/>}/>
+            <Route path="/order" element={<Orders user={user} getOrdersWithParams={getOrdersWithParams} isOrderById={true}/>}/>
+            {/*vvv Admin pages vvv*/}
+            <Route path="/admin" element={<AdminLanding/>}/>
             <Route path="/admin/create-employee" element={<CreateEmployee/>}/>
             <Route path="/admin/modify-employee" element={<ModifyEmployee/>}/>
+            <Route path="/admin/orders" element={<AdminOrders user={user} getOrders={getOrders}/>}/>
+            <Route exact path="/admin/store" element= {<><h1 className={classes.title}>Store</h1> <AdminProducts products={products} user={user}
+            favorites={favorites} onAddToCart={handleAddToCart} onAddToFavorites={handleAddToFavorites}/> </>} />
             <Route path="/validate/employee" element={<EmployeeRegister/>}/>
-            <Route path="profile" element={<Profile user={user}/>}/>
-            <Route path="orders" element={<Orders user={user} getOrders={getOrders}/>}/>
-
           </Routes>
           </div>
           <Footer/>

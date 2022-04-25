@@ -14,7 +14,7 @@ const Products = ({ commerce, products, isLoggedIn, changePrice}) => {
 
     useEffect(() => {
         const params = window.location.search;
-        const paramID = new URLSearchParams(params).get('productID');
+        const paramID = new URLSearchParams(params).get('ref');
         fetchProduct(paramID);
     }, [products]);
     

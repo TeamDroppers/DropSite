@@ -45,6 +45,35 @@ const userInfo = async ()=>{
   return data;
 }
 
+const updateUser = async (body)=>{
+  let user = {};
+  let token = localStorage.getItem('token');
+  if(token){ 
+    const config = {
+      method: 'patch',
+      url: 'https://droppers-node.herokuapp.com/api/v1/auth',
+      headers: { 
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      },
+      data : JSON.stringify(body)
+    };
+    await axios(config)
+    .then(function (response) {
+      user = response.data;
+      user.token = token;
+      (user.success) ? user.isLoggedIn = true : user.isLoggedIn = false;
+      return user;
+    })
+    .catch(function (error) {
+      console.log(error);
+      user = {success:false, isLoggedIn:false};
+    });
+  }
+  
+  return user;
+}
+
 const updateFavorites = async (productId) =>{
       const user = await userInfo();
       try{
@@ -104,15 +133,47 @@ const changeProductPrice = async(update)=>{
 
 }
 
-const getOrders = async(email)=>{
+const getOrders = async(limit, page)=>{
+    const url = new URL(
+      "https://api.chec.io/v1/orders"
+  );
+
+  let params = {
+      "limit": limit,
+      "page":page,
+  };
+  Object.keys(params)
+      .forEach(key => url.searchParams.append(key, params[key]));
+
+  const config = {
+    method: 'GET',
+    url: url,
+    headers: { 
+      'X-Authorization': `${process.env.REACT_APP_CHEC_SECRET_KEY}`, 
+      'Content-Type': 'application/json'
+    },
+  };
+
+  let orders = {};
+  await axios(config)
+  .then(function (response) {
+    orders = response.data; 
+    orders.success = true; 
+  })
+  .catch(function (error) {
+    console.log(error);
+    orders.success = false;
+  });
+  return orders;
+
+}
+
+const getOrdersWithParams = async(params)=>{
   const url = new URL(
     "https://api.chec.io/v1/orders"
 );
+  params.limit = 5;
 
-let params = {
-    "limit": "5",
-    "query":email,
-};
 Object.keys(params)
     .forEach(key => url.searchParams.append(key, params[key]));
 
@@ -124,7 +185,6 @@ const config = {
     'Content-Type': 'application/json'
   },
 };
-
 
 let orders = {};
 await axios(config)
@@ -140,4 +200,4 @@ return orders;
 
 }
 
-export{signInStatus, signUserOut, userInfo, updateFavorites, changeProductPrice, getOrders};
+export{signInStatus, signUserOut, userInfo, updateFavorites, changeProductPrice, getOrders, getOrdersWithParams, updateUser};

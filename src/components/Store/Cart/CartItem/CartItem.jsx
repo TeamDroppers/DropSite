@@ -20,10 +20,10 @@ const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, o
 
   return (
     <Card className={classes.itemContainer}>
-        <CardMedia image={item.image.url} alt={item.name} className={classes.media} onClick={()=>{window.location = `/product/?productID=${item.product_id}`}}/>
+        <CardMedia image={item.image.url} alt={item.name} className={classes.media} onClick={()=>{window.location = `/product/?ref=${item.product_id}`}}/>
         <CardContent className={classes.cardContent}>
             <Typography  variant="h4"> {item.name}</Typography>
-            <Typography className={classes.productPrice} variant="h5" onClick={()=>{window.location = `/product/?productID=${item.product_id}`}}> {item.line_total.formatted_with_symbol} </Typography>    
+            <Typography className={classes.productPrice} variant="h5" onClick={()=>{window.location = `/product/?ref=${item.product_id}`}}> {item.line_total.formatted_with_symbol} </Typography>    
         </CardContent>
         <div className={classes.cartActions}>
             <div className={classes.buttons}>

@@ -7,13 +7,83 @@ import useStyles from './styles';
 const Products = ({ products,  user, favorites, onAddToCart, onAddToFavorites }) => {
     const classes = useStyles();
 
+    const [adminOptions, setAdminOptions] = useState(<></>);
+    const [adminView, setAdminView] = useState(false);
+    const [customerView, setCustomerView] = useState(false);
+    const [guestView, setGuestView] = useState(false);
+
+    useEffect(() => {
+        checkUser();
+    }, [user]);
+
+    const checkUser = ()=>{
+        if(!user.isLoggedIn)
+        {
+            setAdminView(false);
+            setCustomerView(false);
+            setGuestView(true);
+            setAdminOptions(<></>);
+        }
+        else{
+            if(user.role >= 2){
+                setAdminView(true);
+                setCustomerView(false);
+                setGuestView(false);
+                setAdminOptions(<AdminOptions/>);
+            }
+            else{
+                setAdminView(false);
+                setCustomerView(true);
+                setGuestView(false);
+                setAdminOptions(<></>);
+            }
+        }
+    }
+
+    const CustomerView = ()=>{
+        setGuestView(false);
+        document.getElementById('guest-view-checkbox').checked = false;
+        setAdminView(customerView);
+        setCustomerView((prev) => !prev);
+    }
+
+    const GuestView = ()=>{
+        setCustomerView(false);
+        document.getElementById('customer-view-checkbox').checked = false;
+        setAdminView(guestView);
+        setGuestView((prev) => !prev);
+    }
+
+    function AdminOptions(){
+        return(
+                <div className={classes.adminOptions}>
+
+                    <div className={classes.adminOption}>
+                        <label className={classes.adminOptionLabel}>Customer View</label>
+                        <label className="switch">
+                            <input id="customer-view-checkbox" type="checkbox"/>
+                            <span className="slider round" onClick={CustomerView}></span>
+                        </label>
+                    </div>
+
+                    <div className={classes.adminOption}>
+                        <label className={classes.adminOptionLabel}>Guest View</label>
+                        <label className="switch" >
+                            <input id="guest-view-checkbox"  type="checkbox"/>
+                            <span className="slider round" onClick={GuestView}></span>
+                        </label>
+                    </div>
+
+                </div>
+        );
+    }
 
     function ProductDisplay (){
         return(
             products.map((product) => (
                 <Grid className={classes.productContainer} item key={product.id} xs={10} sm={8} md={5} lg={4} xl={3}>
                     <Product className={classes.product} product={product} user={user} isFavorite={(favorites.filter(favorite => favorite['id'] === product.id)).length > 0} 
-                    onAddToCart={onAddToCart} onAddToFavorites={onAddToFavorites}
+                    onAddToCart={onAddToCart} onAddToFavorites={onAddToFavorites} adminView={adminView} guestView={guestView} customerView={customerView} 
                     />
                 </Grid>
             ))
@@ -22,6 +92,7 @@ const Products = ({ products,  user, favorites, onAddToCart, onAddToFavorites })
 
     return(
         <main className={classes.content}>
+            {adminOptions}
             <div className={classes.toolbar} />
             <Grid container flexGrow = '1' justifyContent ="space-evenly" spacing={4}>
                 <ProductDisplay/>
