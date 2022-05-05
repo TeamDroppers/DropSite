@@ -7,7 +7,7 @@ export { default as Favorites } from './Store/Favorites/Favorites'
 export { default as About } from './Pages/About';
 export { default as Contact } from './Pages/Contact';
 export { default as Footer } from './Footer';
-export { default as Nav } from './navbar/Nav';
+export { default as Nav } from './Navbar/Nav';
 export { default as Forgot } from './Pages/User/Forgot';
 export { default as Login } from './Pages/User/Login';
 export { default as Register } from './Pages/User/Register';

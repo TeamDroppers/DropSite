@@ -1,4 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { BoltRounded } from '@mui/icons-material';
+import { fontSize } from '@mui/system';
 
 export default makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
@@ -34,5 +36,21 @@ export default makeStyles((theme) => ({
     fontWeight:'600',
     marginRight:'2rem',
     alignSelf:'center',
+  },
+  filter:{
+    padding:'20px',
+    height:'100px',
+    fontSize:'20px',
+    fontWeight:'bold',
+  },
+  select:{
+    width:'150px',
+    padding:'0 0 0 10px',
+    border:'none',
+    outline:'none',
+    fontWeight:'bold',
+    color:'purple',
+    background:'transparent',
+    cursor:'pointer',
   },
 }));

@@ -33,10 +33,10 @@ const App = () => {
     const fetchUser = async () => {
       if(!products || products.length === 0) return;
       let initialFavorites = [];
-      console.log('products are\n' + products);
+      //console.log('products are\n' + products);
       await userInfo()
       .then(async (user)=>{
-        console.log(user)
+        //console.log(user)
         setUser(user);
         user.favorites.forEach(favorite => {
           const matchingProduct = (products.filter(product => product['id'] === favorite.item_id))

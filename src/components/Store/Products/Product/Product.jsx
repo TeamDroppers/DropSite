@@ -3,12 +3,16 @@ import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } fro
 import { AddShoppingCart, Favorite } from '@material-ui/icons'
 import useStyles from './styles';
 import '../../../item.css'
+import { CookieSharp } from '@mui/icons-material';
 
 const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites, adminView, guestView, customerView}) => {
     const classes = useStyles();
     const [adminRender, setAdminRender] = useState(<></>);
     const [customerRender, setCustomerRender] = useState(<></>);
     const [guestRender, setGuestRender] = useState(<></>);
+
+    //console.log(product.categories[0].slug); //view available category slugs on console.log
+    
 
     useEffect(() => {
         setupView();//window.requestAnimationFrame(()=>setTimeout(setupView, 0));
