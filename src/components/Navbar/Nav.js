@@ -168,9 +168,9 @@ function Nav({totalItems, user, products}){
                         }} >&#8801;</button>
                 </div>
             </nav>
-            { (location.pathname === '/store' || location.pathname === '/cart' || location.pathname === '/favorites') && (
+            { location.pathname === '/store' && (
                     <Searchbar products={products}/>
-                )}
+            )}
             <nav className = "sidemenu " id ="sidemenu" >
                 <div className = "dropdown-control" id = "dropdown-close">
                     <button className = "dropdown-button" onClick={
