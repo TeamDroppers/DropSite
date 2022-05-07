@@ -53,9 +53,9 @@ const Checkout = ({ cart, order, onCaptureCheckout, error, user }) => {
     let Confirmation = () => order.customer ? (
         <>
           <div>
-            <Typography variant="h5">Thank you for your purchase, {order.customer.firstname} {order.customer.lastname}!</Typography>
+            <Typography variant="h5">Thank you for your purchase!</Typography>
             <Divider className={classes.divider} />
-            <Typography variant="subtitle2">Order ref: {order.customer_reference}</Typography>
+            <Link className="checkout-order-reference" variant="subtitle2" to={`/order?ref=${order.customer_reference}`}>Order ref: {order.customer_reference}</Link>
           </div>
           <br />
           <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
@@ -83,7 +83,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error, user }) => {
           </>
       }
     const Form = () => activeStep === 0
-        ? <AddressForm checkoutToken={checkoutToken} setCheckoutToken={setCheckoutToken} next={next} />
+        ? <AddressForm checkoutToken={checkoutToken} setCheckoutToken={setCheckoutToken} next={next} user={user}/>
         : <PaymentForm shippingData={shippingData} checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} onCaptureCheckout={onCaptureCheckout} timeout={timeout} />
 
     function Loading(){

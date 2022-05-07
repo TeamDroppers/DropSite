@@ -5,7 +5,7 @@
     min-height: inherit;
     min-width: inherit;
     background-color: rgb(64, 75, 78);
-    background-image: url("https://images.squarespace-cdn.com/content/v1/5c819b9b0cf57dfc7b931ec6/1628279478211-EVP8MMQ95Q3S6EWF9DD3/ruchindra-gunasekara-GK8x_XCcDZg-unsplash.jpg");
+    background-image: url("../../../../public/warehouse.png");
     background-size: cover;   
     backdrop-filter: blur(30px);
     display: flex;
@@ -21,14 +21,24 @@
 
   
 .user-form form{
-    position: relative;
-    /* height: 400px; */
+    /* position: relative;
+    height: 400px;
     align-self: center;
     width: fit-content;
     background-color: rgba(42, 51, 55, 0.719);
     border-radius: 5px;
     box-shadow: 5px 5px 20px 4px #44444488;
-    backdrop-filter: blur(20px);
+     */
+    padding: 3rem 10%;
+    min-width: 40vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(99, 125, 136, 0.719);
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px 4px #44444488;
+    backdrop-filter: blur(10px);
 }
 
 .user-form h1{
@@ -39,14 +49,17 @@
     margin: 2rem auto;
     margin-top: 0;
 }
-  
+
+
+
 .form-control-internal{
     display: grid;
     /* grid-template-columns: 150px 1fr; */
     align-items: center;
     justify-items: start;
     gap: 0 1rem;
-    margin-bottom: 0.75rem;
+    margin: 0.75rem;
+    min-width: 60%;
 }
   
 form {
@@ -56,11 +69,24 @@ form {
 
 .form-alert{
     display: inline-block;
-    padding: 10px;
+    /* padding: 2em; */
+    max-height: 2em;
     color: white;
     font-size: 1rem;
     font-weight: 600;
     text-shadow: 2px 2px 5px #33333333;
+    margin-bottom: 1em;
+}
+
+.form-alert-checkout{
+    display: inline-block;
+    max-height: 2em;
+    color: maroon;
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 5px #33333333;
+    margin-top: 1rem;   
+    padding: 1em 0;
 }
 
 form > .logo{
@@ -74,6 +100,9 @@ form > .logo{
     bottom: 5%;
     margin: 1rem 0 0 0;
     left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .alt-route a{
@@ -81,7 +110,7 @@ form > .logo{
     color: rgb(255, 255, 255);
     font-weight: 600;
     font-size: 0.8rem;
-    padding: 0 2rem;
+    padding: 0 0.5rem;
 }
 
 .alt-route a:hover{
@@ -153,7 +182,7 @@ select{
     line-height: 2rem;
     letter-spacing: 1px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
-    color:rgb(115, 255, 162);
+    color:rgb(220, 255, 252);
 }
 
 .submit-fail{
@@ -180,7 +209,7 @@ select{
 
 .submit:hover{
     cursor: pointer;
-    background: rgba(119, 148, 145, 0.863);
+    background: #269;
     color: white;
     text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.466);
     box-shadow: 2px 5px 10px 4px #242323c9;
@@ -188,7 +217,7 @@ select{
 
 .loader {
     display: inline-block;
-    margin: 5% 0;
+    margin: 0 0;
     text-align: center;
     border: 2px solid #f3f3f3;
     border-radius: 50%;

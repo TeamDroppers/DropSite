@@ -13,6 +13,7 @@ export { default as Register } from './Pages/User/Register';
 export { default as Reset } from './Pages/User/Reset';
 export { default as Profile } from './Pages/User/Profile/Profile';
 export { default as Orders } from './Pages/User/Orders/Orders';
+export {default as FAQ} from './Pages/FAQ/FAQ';
 // admin vvvvv
 export { default as CreateEmployee } from './Pages/User/Admin/CreateEmployee';
 export { default as ModifyEmployee } from './Pages/User/Admin/ModifyEmployee';

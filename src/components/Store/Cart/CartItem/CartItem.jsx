@@ -3,7 +3,7 @@ import { Typography, Button, Card, CardContent, CardMedia, IconButton } from '@m
 import { Favorite } from '@material-ui/icons'
 import useStyles from './styles';
 
-const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, onAddToFavorites }) => {
+const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, onAddToFavorites, maxQuantity }) => {
     const classes = useStyles();
     console.log(item);
     let favoriteClass = ""
@@ -11,11 +11,29 @@ const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, o
         favoriteClass = "favorite"; 
     
     let fav_id = item.product_id + "_favorite"
-
+    let form_alert_id = item.product_id + "_form-alert"
+    console.log(maxQuantity)
     function internalOnAddToFavorites(productId)
     {
         document.querySelector(`#${fav_id}`).classList.toggle('favorite');
         onAddToFavorites(productId);
+    }
+
+    let timeoutID;
+
+    const messageTimeout = ()=>{
+        timeoutID = setTimeout(() => {
+            document.querySelector(`#${form_alert_id}`).classList.add('hidden');
+        }, 3000)
+      }
+
+    const AlertUser = () =>{
+        clearTimeout(timeoutID);
+        document.querySelector(`#${form_alert_id}`).style.display = 'block'
+        document.querySelector(`#${form_alert_id}`).innerHTML = 'Maximum quantity added'
+        document.querySelector(`#${form_alert_id}`).classList.remove('hidden');
+        document.querySelector(`#${form_alert_id}`).style.color = 'maroon';
+        messageTimeout();
     }
 
   return (
@@ -29,7 +47,7 @@ const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, o
             <div className={classes.buttons}>
                 <Button type="button" size="small" onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}>-</Button>
                 <Typography className={classes.itemQuantity}>  {item.quantity}</Typography>
-                <Button type="button" size="small" onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}>+</Button>    
+                <Button type="button" size="small" onClick={() => { if(item.quantity + 1 > maxQuantity) {AlertUser(); return;} onUpdateCartQty(item.id, item.quantity + 1) }}>+</Button>    
             </div>
                 <Button  className={classes.removeButton} variant="contained" type="button" color="secondary" onClick={() => onRemoveFromCart(item.id)}>Remove</Button> 
                     {user.isLoggedIn &&
@@ -40,6 +58,8 @@ const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, o
                     </div>
                     }
         </div> 
+        <div className="form-alert hidden" id={form_alert_id}/>
+            
     </Card>
   )
 }  

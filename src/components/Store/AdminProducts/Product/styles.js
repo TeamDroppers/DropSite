@@ -71,9 +71,9 @@ export default makeStyles(() => ({
     alignSelf:'center',
     width:'fit-content',
     cursor:'pointer',
-    background:'#335533',
-    color:'white',
-    border:'1px solid transparent',
+    background: 'white',
+    color: '#269',
+    border: '1px solid #269',
     borderRadius:'4px',
     paddingRight:'1.5rem',
     paddingLeft:'1.5rem',
@@ -81,10 +81,10 @@ export default makeStyles(() => ({
     boxShadow:'2px 2px 15px 2px #44444444',
     fontWeight:'600',
     '&:hover':{
-      background:'#229977',
-      color:'white',
       fontWeight:'600',
-      boxShadow:'2px 2px 15px 2px #44444488',
+      boxShadow: '2px 2px 15px 2px #22222244',
+      color: 'white',
+      background: '#269',
     }
   },
   noQuantity:{

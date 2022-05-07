@@ -7,6 +7,7 @@ import { IconButton, Badge } from "@material-ui/core";
 import { ShoppingCart, Favorite } from '@material-ui/icons';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeNavbar from './Navbar';
+import Searchbar from '../Searchbar/Searchbar';
 // import $ from 'jquery'
 
 // import useStyles from '../components/Navbar/styles';
@@ -18,7 +19,7 @@ const navStyle = {
     color: 'white'
 }
 
-function Nav({totalItems, user}){
+function Nav({totalItems, user, products}){
 
     // const classes = useStyles();
     const location = useLocation();
@@ -110,15 +111,10 @@ function Nav({totalItems, user}){
     {
         return(
             <div name = "nav-container">
-            <nav className = "topbar bg-dark">
+            <nav className = "topbar">
                 <div className = "nav--logo" >
                     <Link to = "/" ><img  alt = "logo" src={logo} /></Link> 
                 </div>
-                { (location.pathname === '/store' || location.pathname === '/cart' || location.pathname === '/favorites') && (
-                <div className = "searchbar-container">
-                    <input type="text" placeholder="Search.."/>
-                </div>
-                )}
                 <ul className="nav-links">
                     <Link style={navStyle} to="/store">
                         <li className = "nav-link">Store</li>
@@ -147,6 +143,22 @@ function Nav({totalItems, user}){
                     </IconButton> 
                     {loginControl}
                 </ul>
+                {/* <ul className="nav-links reduced-nav-links">
+                    <Link style={navStyle} to="/store">
+                        <li className = "nav-link">Store</li>
+                    </Link>
+                    { (location.pathname === '/store' || location.pathname === '/cart' || location.pathname === '/favorites' || location.pathname === '/product/') && (
+                    <>
+                        <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
+                            <Badge className = "nav-link" badgeContent={totalItems} color="secondary">
+                                <ShoppingCart />
+                            </Badge>
+                        </IconButton> 
+                        {userNavFavorite}
+                    </>
+                    )}
+                </ul> */}
+
                 <div className ="dropdown-control" id = "dropdown-open">
                     <button className = "dropdown-button" onClick={
                         ()=>{
@@ -156,6 +168,9 @@ function Nav({totalItems, user}){
                         }} >&#8801;</button>
                 </div>
             </nav>
+            { (location.pathname === '/store' || location.pathname === '/cart' || location.pathname === '/favorites') && (
+                    <Searchbar products={products}/>
+                )}
             <nav className = "sidemenu " id ="sidemenu" >
                 <div className = "dropdown-control" id = "dropdown-close">
                     <button className = "dropdown-button" onClick={
@@ -198,7 +213,7 @@ function Nav({totalItems, user}){
     return(
         <>
         {location.pathname !== '/' && <Navbar/>}
-        {location.pathname === '/' && <HomeNavbar user={user} logout={logout} />}
+        {location.pathname === '/' && <></> && false && <HomeNavbar user={user} logout={logout} />}
         </>
     ); 
     

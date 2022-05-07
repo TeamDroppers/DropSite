@@ -3,9 +3,6 @@ import '../../Orders/orders.css'
 import { Link } from 'react-router-dom';
 
 const Order = ({ order }) => {
-    const symbol = order.currency.symbol;
-    const total = order.tax.amount.raw + order.order.total.raw
-    const symbol_total = symbol + '' + total;
 
   return (
       <>
@@ -22,11 +19,11 @@ const Order = ({ order }) => {
         <thead role="rolegorup">
             <tr role="row">
                 <td role="cell" id="order-reference">
-                <Link to = {`/order?ref=${order.customer_reference}`}>{order.customer_reference}</Link>
+                <Link to = {`/order?ref=${order.customer_reference}&return=admin/orders`}>{order.customer_reference}</Link>
                 </td>
                 <td role="cell">{order.status_payment}</td>
                 <td role="cell">{order.status_fulfillment}</td>
-                <td role="cell">{symbol_total}</td>
+                <td role="cell">{order.order.total_with_tax.formatted_with_symbol}</td>
             </tr>
         </thead>
     </table>

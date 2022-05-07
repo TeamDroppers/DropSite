@@ -41,12 +41,10 @@ const PaymentForm = ({ checkoutToken, nextStep, backStep, shippingData, onCaptur
     }
   };
 
-  const symbol = checkoutToken.live.currency.symbol;
-  const total = checkoutToken.live.tax.amount.raw + checkoutToken.live.subtotal.raw + checkoutToken.live.shipping.price.raw;
-  const symbol_total = symbol + '' + total;
   return (
     <>
-      <Review checkoutToken={checkoutToken} total={symbol_total}/>
+      <Review checkoutToken={checkoutToken} total={checkoutToken.live.total_with_tax.formatted_with_symbol} subtotal={checkoutToken.live.subtotal.formatted_with_symbol} 
+      tax={checkoutToken.live.tax.amount.formatted_with_symbol} shipping={checkoutToken.live.shipping.price.formatted_with_symbol}/>
       <Divider />
       <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>Payment method</Typography>
       <Elements stripe={stripePromise}>
@@ -57,7 +55,7 @@ const PaymentForm = ({ checkoutToken, nextStep, backStep, shippingData, onCaptur
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button variant="outlined" onClick={backStep}>Back</Button>
               <Button type="submit" variant="contained" disabled={!stripe} color="primary">
-                Pay {symbol_total}
+                Pay {checkoutToken.live.total_with_tax.formatted_with_symbol}
               </Button>
             </div>
           </form>

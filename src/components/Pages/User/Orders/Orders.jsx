@@ -6,15 +6,17 @@ import OrderDetails from './OrderDetails/OrderDetails';
 
 const Orders = ({user, getOrdersWithParams, isOrderById}) => {
 
+    const params = window.location.search;
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
-
-
+    let returnLink = new URLSearchParams(params).get('return');
+    if(returnLink === null)
+        returnLink = '';
+        
     useEffect(() => {
         if(user && user.success !== undefined){
 
             if(isOrderById) {
-                const params = window.location.search;
                 const orderReference = new URLSearchParams(params).get('ref');
                 getOrdersWithParams({"query":orderReference}).then((orders)=>{setLoading(false); if(orders.meta.pagination.total == 0) return; setOrders(orders.data); })
             }
@@ -67,7 +69,7 @@ const Orders = ({user, getOrdersWithParams, isOrderById}) => {
         {isOrderById &&
         <>  
         <div id="return">
-            <Link to = {`/profile`}>Return to Profile</Link>
+            <Link to = {`/${returnLink}`}>Return</Link>
         </div>
         <div className='order-details'>
             {orders.length > 0 &&

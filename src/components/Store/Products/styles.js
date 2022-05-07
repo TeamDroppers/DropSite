@@ -15,9 +15,9 @@ export default makeStyles((theme) => ({
     flexgrow: '2',
   },
   productContainer: {
-    [theme.breakpoints.down('sm')]: {
-      minWidth: '90vw',
-   },
+  //   [theme.breakpoints.down('sm')]: {
+  //     minWidth: '90vw',
+  //  },
   },
   adminOptions:{
     display:'flex',
@@ -34,5 +34,27 @@ export default makeStyles((theme) => ({
     fontWeight:'600',
     marginRight:'2rem',
     alignSelf:'center',
+  },  
+  filter:{
+
+    padding:'20px',
+    height:'100px',
+    fontSize:'20px',
+    fontWeight:'bold',
+    marginBottom:'2rem',
+    display: 'flex',
+    gap:'2rem',
+    flexDirection:'column',
+    alignItems:'center',
+  },
+  select:{
+    width:'150px',
+    padding:'0 0 0 10px',
+    border:'none',
+    outline:'none',
+    fontWeight:'bold',
+    color:'purple',
+    background:'transparent',
+    cursor:'pointer',
   },
 }));

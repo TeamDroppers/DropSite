@@ -4,7 +4,7 @@ import useStyles from './components/Store/Cart/styles';
 import React, { useState, useEffect } from 'react';
 import { commerce } from './components/lib/commerce';
 import { Products, Cart, Checkout, Favorites, ProductById, ModifyProduct } from './components';
-import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, ModifyEmployee, EmployeeRegister, Profile, Orders, AdminProducts, AdminOrders, AdminLanding } from './components';
+import { About, Contact, Footer, Nav, Forgot, Login, Register, Reset, CreateEmployee, ModifyEmployee, EmployeeRegister, Profile, FAQ, Orders, AdminProducts, AdminOrders, AdminLanding } from './components';
 import { userInfo, updateFavorites, changeProductPrice, getOrders, getOrdersWithParams, updateUser } from './components/utilites';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './components/homepage/Homepage'
@@ -125,7 +125,7 @@ const App = () => {
         <div className="App">
           <div className="main-container">
           <Nav totalItems= {cart.total_items}
-          user={user}/>
+          user={user} products={products}/>
           <Routes>
             <Route exact path="/" element= {<Homepage/>}/>
             <Route path="/cart" element=
@@ -192,7 +192,9 @@ const App = () => {
             <Route path="/reset" element={<Reset/>}/>
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/profile" element={<Profile user={user} getOrdersWithParams={getOrdersWithParams} isOrderById={false} updateUser={updateUser} setUser={setUser}/>}/>
+            <Route path="/orders" element={<Orders user={user} getOrdersWithParams={getOrdersWithParams} isOrderById={false}/>}/>
             <Route path="/order" element={<Orders user={user} getOrdersWithParams={getOrdersWithParams} isOrderById={true}/>}/>
+            <Route path="/faq" element={<FAQ/>}/>
             {/*vvv Admin pages vvv*/}
             <Route path="/admin" element={<AdminLanding/>}/>
             <Route path="/admin/create-employee" element={<CreateEmployee/>}/>

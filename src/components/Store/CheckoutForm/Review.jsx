@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, List, ListItem, ListItemText } from '@material-ui/core';
 
-const Review = ({ checkoutToken, total }) => {
+const Review = ({ checkoutToken, total, subtotal, shipping, tax }) => {
   return ( 
     <>
             <Typography variant="h6" gutterBottom>Order summary</Typography>
@@ -13,7 +13,19 @@ const Review = ({ checkoutToken, total }) => {
                     </ListItem>
                 ))}
                 <listItem style={{padding: '10px 0'}}>
-                    <ListItemText primary="Total" />
+                    <ListItemText primary="Subtotal" />
+                        <Typography variant="subtitle1" style={{ fontWeight: 700 }}>
+                            {subtotal}
+                    </Typography>
+                    <ListItemText primary="Shipping" />
+                    <Typography variant="subtitle1" style={{ fontWeight: 700 }}>
+                        {shipping}
+                    </Typography>
+                    <ListItemText primary="Tax" />
+                    <Typography variant="subtitle1" style={{ fontWeight: 700 }}>
+                        {tax}
+                    </Typography>
+                    <ListItemText primary="Total" style={{marginTop:'2rem'}} />
                     <Typography variant="subtitle1" style={{ fontWeight: 700 }}>
                         {total}
                     </Typography>

@@ -15,7 +15,7 @@ function Footer() {
 
   function Foot() {
     return (
-      <section className="section footer bg-dark text-white">
+      <section className="section footer text-white">
         <div className="container">
           <div className="row">
             <div className="col-md-4">
@@ -49,6 +49,12 @@ function Footer() {
   
               <div>
                 <Link to="/"> Home </Link>
+              </div>   
+              <div>
+                <Link to="/cart">Cart</Link>
+              </div>           
+              <div>
+                <Link to="/cart">FAQ</Link>
               </div>
               <div>
                 <Link to="/about">About</Link>
@@ -56,9 +62,7 @@ function Footer() {
               <div>
                 <Link to="/contact">Contact</Link>
               </div>
-              <div>
-                <Link to="/cart">Cart</Link>
-              </div>
+
             </div>
             <div className="col-md-4">
               <h6>Contact Information</h6>

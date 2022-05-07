@@ -84,13 +84,13 @@
 
 #save{
     background: white;
-    color: #224499;
-    border: 1px solid #224499;
+    color: #269;
+    border: 1px solid #269;
 }
 
 #save:hover{    
     color: white;
-    background: #224499;
+    background: #269;
 }
 
 #cancel{

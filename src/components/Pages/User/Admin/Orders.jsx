@@ -13,7 +13,7 @@ const Orders = ({user, getOrders}) => {
     const [totalOrders, setTotalOrders] = useState(0);
     
     useEffect(() => {
-        if(user && user.success && user.role >= 2){
+        if(user && user.role >= 2){
             getOrders(limit, page).then((orders)=>{setTotalOrders(orders.meta.pagination.total); if(orders.meta.pagination.total == 0) return; console.log(orders.data); setOrders(orders.data); })
         }
         else
@@ -21,10 +21,28 @@ const Orders = ({user, getOrders}) => {
     }, [user]);
 
     useEffect(()=>{
-        console.log(page)
+        console.log('page is: ' + page)
+        console.log('limit is: ' + limit)
+        console.log('total is: ' + totalOrders)
+
+        // if(page*limit > totalOrders)
+        // {
+        //     if(page <= 1) return;
+        //     setPage(prev => prev-1);
+        //     updatePageOptions();
+        //     updateLimitOptions();
+        // }
+        if(totalOrders > 0 && totalOrders < limit)
+        {
+            setLimit(totalOrders)
+            updatePageOptions();
+            updateLimitOptions();
+        }
+        else{
         updatePageOptions();
         updateLimitOptions();
         getOrders(limit, page).then((orders)=>{setTotalOrders(orders.meta.pagination.total); if(orders.meta.pagination.total == 0) return; console.log(orders.data); setOrders(orders.data);})
+        }
     }, [limit, page, totalOrders])
 
     useEffect(()=>{
@@ -32,7 +50,7 @@ const Orders = ({user, getOrders}) => {
     },[orders])
 
     const updatePageOptions = ()=>{
-        if(totalOrders < page + limit)
+        if(totalOrders <= page*limit)
             document.getElementById('next').classList.add('hidden');
         else
             document.getElementById('next').classList.remove('hidden');
@@ -44,7 +62,7 @@ const Orders = ({user, getOrders}) => {
 
     const updateLimitOptions = ()=>{
         let limitOptions = [];
-        for(let i = 1; i <= 5 && i <= totalOrders; i++){
+        for(let i = 1; i <= 10 && i <= totalOrders; i++){
             const data = {'value':i, "label":''+i};
             limitOptions.push(data);
         }
@@ -74,19 +92,21 @@ const Orders = ({user, getOrders}) => {
         <div className= 'title-area'>
             <h1>Order History</h1>
         </div>
-        {orders.length > 0 &&
+        { orders !== undefined && orders.length > 0 &&
         <>
             <DisplayOrders orders={orders}/>
         </>
         }
-        {orders.length === 0 &&
+        { orders !== undefined && orders.length === 0 &&
             <h4>No orders to view</h4>        
         }
     </div>
     <div className= 'select-area'>
-        <button id="prev" onClick={()=>{if(page > 1)setPage(prev => prev-1)}}>Prev Page</button>
-        <Select defaultValue={{ value: '2', label: '2' }} className="select" id="emp-select" options={selectLimit} onChange={handleSelectLimit}/>
-        <button id="next" onClick={()=>{setPage(prev => prev+1)}}>Next Page</button>
+        <button  className="hidden" id="prev" onClick={()=>{if(page > 1)setPage(prev => prev-1)}}>Prev Page</button>
+        {totalOrders > 0 &&
+        <Select className="select" id="emp-select" options={selectLimit} onChange={handleSelectLimit}/>
+        }
+        <button  className="hidden" id="next" onClick={()=>{setPage(prev => prev+1)}}>Next Page</button>
     </div>
     </>
   );

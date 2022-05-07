@@ -100,14 +100,14 @@ export default makeStyles(() => ({
   },
   noQuantityText:{
     fontWeight: '700',
-    color: '#4FA',
+    color: 'rgb(85, 168, 201)',
     background: '#FFF6',
     padding: '3rem',
     border: '1px solid transparent',
     minWidth:  '100%',
     letterSpacing: '0.06rem',
     position: 'relative',
-    textShadow: '3px 3px 6px #757575',
+    textShadow: '2px 2px 3px #a6a6a6',
     margin: '10% auto',
     textAlign: 'center',
   }

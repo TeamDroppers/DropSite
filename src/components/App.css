@@ -34,6 +34,7 @@ code {
 }
 
 .main-container{
+  background-color: white;
   position: relative;
   min-height: 85vh;
   display: flex;
@@ -50,6 +51,7 @@ code {
   justify-content: space-evenly; 
   align-items: center;
   z-index: 15;
+  background: #134;
 }
 
 .nav-links {
@@ -73,7 +75,7 @@ code {
 }
 
 .nav-link:hover{
-  background: #224499;
+  background: #269;
   box-shadow: 3px 3px 20px 3px #92b3a955;
   color: white;
   border-radius: 5px;
@@ -86,7 +88,6 @@ code {
   /* align-items: center; */
   align-self: flex-start;
   margin-left: 2rem;
-  min-width: 5%;
 }
 
 .nav--logo > *{
@@ -121,15 +122,9 @@ code {
 .nav-button:hover{   
   cursor:pointer;
   text-shadow: none;
-  background: #224499;
+  background: #269;
   color: white;
   box-shadow: 5px 5px 10px 4px #18181888;
-}
-
-.searchbar-container{
-  width: 20%;
-  align-items: center;
-  justify-content: center;
 }
 
 .sidemenu{
@@ -140,7 +135,10 @@ code {
   position: fixed;
   top: 0;
   height:100vh;
-  background: rgb(54, 62, 65);
+  background: #134;
+  border-left: 5px;
+  border-left-style: solid;
+  border-color: #145;
   width: 70vw;
   right: -70vw;
   transition: transform 300ms ease-in;
@@ -157,19 +155,23 @@ code {
   list-style: none;
   font-size: 1rem;
   font-weight: 600;
+  padding-bottom: 5rem;
 }
 
 .sidemenu  .nav-link{
   margin-top: 3rem;
 }
 
-@media only screen and (min-width: 1200px){
+@media only screen and (min-width: 1000px){
   .dropdown-control{
     display:none;
   }
+  .reduced-nav-links{
+    display: none;
+  }
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1000px) {
 
 
 
@@ -184,6 +186,10 @@ code {
 
   .topbar > .nav-links{
     display: none;
+  }
+
+  .topbar > .reduced-nav-links{
+    display: contents;
   }
   
   .topbar .dropdown-control{
@@ -203,7 +209,7 @@ code {
   }
 
   .topbar .dropdown-button{
-    background: #BBBBBB33;
+    background: #134;
   }
   
   .dropdown-button{
@@ -247,6 +253,7 @@ code {
 
 .section {
   /* padding-top: 40px; */
+  background: #134;
   padding-bottom: 40px;
 }
 .aboutus {
@@ -287,11 +294,19 @@ code {
 }
 
 .row{
+  --bs-gutter-x: 0; 
+  --bs-gutter-y: 0;
   margin-right: 0;
-  padding-top: 1rem;
+}
+.row>*{
+  padding: 0;
+  margin-top: 1rem;
 }
 
 .section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-top: 40px;
   padding-bottom: 40px;
   font-family: "Oxanium", cursive;
@@ -358,3 +373,7 @@ h6 {
   position: relative;
   left: 60px;
 } */
+
+a{
+  text-decoration: none;
+}

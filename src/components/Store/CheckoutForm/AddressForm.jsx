@@ -7,7 +7,7 @@ import { commerce } from '../../lib/commerce';
 
 import FormInput from './CustomTextField';
 
-const AddressForm = ({ checkoutToken, setCheckoutToken, next }) => {
+const AddressForm = ({ checkoutToken, setCheckoutToken, next, user }) => {
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState('');
     const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -41,6 +41,12 @@ const AddressForm = ({ checkoutToken, setCheckoutToken, next }) => {
         setShippingOptions(options);
         setShippingOption(options[0].id);
     }
+    let timeoutID;
+    const messageTimeout = ()=>{
+        timeoutID = setTimeout(() => {
+          document.querySelector('#feedback').style.opacity = '0'
+        }, 3000)
+      }
 
     useEffect(() => {
         fetchShippingCountries(checkoutToken.id)
@@ -56,6 +62,12 @@ const AddressForm = ({ checkoutToken, setCheckoutToken, next }) => {
     }, [shippingSubdivision])
     
     const handleSubmit = (event)=>{
+        clearTimeout(timeoutID);
+        document.querySelector('#address-form-submit').style.display = 'none';
+        document.querySelector('#submit-loading').style.display = 'inline';
+        document.querySelector('#submit-loading').style.margin = '0 2rem';
+
+
         event.preventDefault();
         const data = {
             firstname: event.target.elements[0].value, //firstname
@@ -74,26 +86,37 @@ const AddressForm = ({ checkoutToken, setCheckoutToken, next }) => {
             country: shippingCountry,
             region: shippingSubdivision,
         })
-        .then((ship)=>{
+        .then(async(ship)=>{
             ship.id = checkoutToken.id
-            setCheckoutToken(ship);
+            // setCheckoutToken(ship);
             console.log(ship)
-            commerce.checkout.setTaxZone(checkoutToken.id, {
+            let tax = await commerce.checkout.setTaxZone(ship.id, {
                 country: shippingCountry,
                 region: shippingSubdivision,
                 postal_zip_code: event.target.elements[5].value,
             })
-            .then((tax)=>{
-                tax.shipping = ship.shipping;
-                setCheckoutToken(tax);
-                console.log(tax);
-                next({...data})
-                console.log(data);
-            })
+
+            tax.shipping = ship.shipping;
+            console.log(tax);
+            next({...data});
+            setCheckoutToken(tax);
+            console.log(data);
+            document.querySelector('#address-form-submit').style.display = 'inline-flex';
+            document.querySelector('#submit-loading').style.display = 'none';
         })
+        .catch((err)=>{
+            console.log(err)
+            document.querySelector('#address-form-submit').style.display = 'inline-flex';
+            document.querySelector('#submit-loading').style.display = 'none';
+            document.querySelector('#feedback').style.opacity = '100'
+            document.querySelector('#feedback').textContent = err.data.error.message;
+            messageTimeout();
+        })
+        
 
     }
-    
+
+    console.log(user)
     return (
     <>  
         <Typography variant="h6" gutterBottom>Shipping Address</Typography>
@@ -101,10 +124,10 @@ const AddressForm = ({ checkoutToken, setCheckoutToken, next }) => {
             <form onSubmit={handleSubmit}>
             {/* <form onSubmit={methods.handleSubmit((data) => { console.log(data); next({ ...data , shippingCountry, shippingSubdivision, shippingOption})} )}> */}
                 <Grid container spacing={3}>
-                    <FormInput name='firstName' label='First Name'/>
-                    <FormInput name='lastName' label='Last Name'/>
+                    <FormInput name='firstName' label='First Name' defaultValue={user.firstName}/>
+                    <FormInput name='lastName' label='Last Name' defaultValue={user.lastName}/>
                     <FormInput name='address1' label='Address'/>
-                    <FormInput name='email' label='Email'/>
+                    <FormInput name='email' label='Email' defaultValue={user.email}/>
                     <FormInput name='City' label='City'/>
                     <FormInput name='zip' label='ZIP / Postal code'/>   
                     <Grid item xs={12} sm={6}>
@@ -135,8 +158,10 @@ const AddressForm = ({ checkoutToken, setCheckoutToken, next }) => {
                 <br />
                 <div style={{ display: 'flex', justifyContent: 'space-between'}}>
                     <Button component={Link} to="/cart" variant="outlined">Back to Cart</Button>
-                    <Button type="submit" variant="contained" color="primary"> Next</Button>
+                    <Button type="submit" variant="contained" color="primary" id="address-form-submit"> Next</Button>
+                    <div className='loader removed'  id="submit-loading"/>
                 </div>
+                <div className = "form-alert-checkout" id='feedback'/>
             </form>
         </FormProvider>
     </>

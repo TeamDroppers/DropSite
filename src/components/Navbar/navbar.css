@@ -80,7 +80,7 @@
 
 .droppers__navbar-links_container button:hover
 {
-    background: #224499;
+    background: #269;
     box-shadow: 3px 3px 20px 3px #92b3a955;
     color: white;
 }
@@ -103,7 +103,7 @@
 .droppers__navbar-sign button:hover,
 .droppers__navbar-menu_container button:hover 
 {
-    background: #224499;
+    background: #269;
     box-shadow: 3px 3px 20px 3px #92b3a955;
     color: white;
 }
@@ -120,4 +120,62 @@
         gap: 4rem;
         font-size: 18px;
     }
+}
+
+.searchbar-container{
+    min-width: 100vw;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #134;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    position: relative;
+  }
+
+  .searchbar-container .searchbar{
+    max-width: 100%;
+    min-width: 100%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 0px;
+  }
+
+.searchbar-item
+{
+    max-width: 100%;
+    min-width: 100%;
+    background: white;
+    z-index: 10;
+}
+
+.searchbar-item-link{
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.searchbar-item:hover
+{
+    cursor: pointer;
+}
+
+.searchbar-item h5{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+
+.searchbar-item-thumbnail{
+    position: relative;
+    max-width: 25%;
+    aspect-ratio: 2.5/1;
+    object-fit: contain;
 }

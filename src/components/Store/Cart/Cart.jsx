@@ -40,7 +40,8 @@ const Cart = ({ cart, products, user, favorites, handleUpdateCartQty, handleRemo
                 {cart.line_items.map((item) =>(
                     <Grid className={classes.product} item xs={10} sm={6} md={5} lg={4} xl={3} key={item.id}>
                         <CartItem item={item} user={user} isFavorite={(favorites.filter(favorite => favorite['id'] === item.product_id)).length > 0} onUpdateCartQty={handleUpdateCartQty} 
-                        onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} onAddToFavorites={handleAddToFavorites} validateItem={validateItem(item)}/>
+                        onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} onAddToFavorites={handleAddToFavorites} validateItem={validateItem(item)}
+                        maxQuantity={ ( products.filter(product => product.id === item.product_id).length > 0) ? products.filter(product => product.id === item.product_id)[0].inventory.available : 0 }/>
                     </Grid>
                 ))}
             </Grid>

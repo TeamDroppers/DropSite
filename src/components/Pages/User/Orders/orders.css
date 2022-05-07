@@ -1,7 +1,5 @@
 .orders-container{
     min-width: 100%;
-    max-height: 70vh;
-    overflow-y: scroll;
     align-self: center;
     padding: 1.5rem;
     box-shadow: 0 0 0 1px rgba(15, 15, 15, .08);
@@ -185,7 +183,6 @@ margin: 0;
 }
 
 .orderById{
-    margin-top: 5rem;
 }
 
 .customer-email{
@@ -220,8 +217,8 @@ margin: 0;
 
 .title-area button, .select-area button{
     background: white;
-    color: #224499;
-    border: 1px solid #224499;
+    color: #269;
+    border: 1px solid #269;
     font-weight: 600;
     border-radius: 4px;
     padding: 0.5rem 0.8rem;
@@ -233,7 +230,7 @@ margin: 0;
     cursor: pointer;
     box-shadow: 2px 2px 15px 2px #22222244;
     color: white;
-    background: #224499;
+    background: #269;
 }
 
 .select-area{

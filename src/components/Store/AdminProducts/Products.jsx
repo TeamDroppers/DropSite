@@ -81,7 +81,7 @@ const Products = ({ products,  user, favorites, onAddToCart, onAddToFavorites })
     function ProductDisplay (){
         return(
             products.map((product) => (
-                <Grid className={classes.productContainer} item key={product.id} xs={10} sm={8} md={5} lg={4} xl={3}>
+                <Grid className={classes.productContainer} item key={product.id} xs={12} sm={6} md={6} lg={3} xl={3}>
                     <Product className={classes.product} product={product} user={user} isFavorite={(favorites.filter(favorite => favorite['id'] === product.id)).length > 0} 
                     onAddToCart={onAddToCart} onAddToFavorites={onAddToFavorites} adminView={adminView} guestView={guestView} customerView={customerView} 
                     />

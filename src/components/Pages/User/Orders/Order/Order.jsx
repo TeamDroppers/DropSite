@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 const Order = ({ order }) => {
     const symbol = order.currency.symbol;
-    const total = order.tax.amount.raw + order.order.total.raw
+    let total = order.tax.amount.raw + order.order.total.raw
+    total = Math.round((total + Number.EPSILON) * 100) / 100
     const symbol_total = symbol + '' + total;
   return (
       <>
@@ -20,7 +21,7 @@ const Order = ({ order }) => {
         <thead role="rolegorup">
             <tr role="row">
                 <td role="cell" id="order-reference">
-                <Link to = {`/order?ref=${order.customer_reference}`}>{order.customer_reference}</Link>
+                <Link to = {`/order?ref=${order.customer_reference}&return=profile`}>{order.customer_reference}</Link>
                 </td>
                 <td role="cell">{order.status_payment}</td>
                 <td role="cell">{order.status_fulfillment}</td>

@@ -6,9 +6,7 @@ import LineItem from './LineItem/LineItem';
 const OrderById = ({ order }) => {
 
 console.log(order);
-const symbol = order.currency.symbol;
-const total = order.tax.amount.raw + order.order.total.raw
-const symbol_total = symbol + '' + total;
+
   return (
       <>
         <div className='order-details'>
@@ -22,12 +20,10 @@ const symbol_total = symbol + '' + total;
                 </tr>
             </thead>
             <thead role="rolegorup">
-                <tr role="row">
-                    {
-                    order.fulfillment.physical.items.map((lineItem) => (
-                            <LineItem lineItem={lineItem} key={lineItem.id}/>
-                    ))}
-                </tr>
+                {
+                order.fulfillment.physical.items.map((lineItem) => (
+                        <LineItem lineItem={lineItem} key={lineItem.id}/>
+                ))}
             </thead>
             </table>
         <table role="table" className="order">
@@ -44,7 +40,7 @@ const symbol_total = symbol + '' + total;
                 <td role="cell">{order.order.subtotal.formatted_with_symbol}</td>
                 <td role="cell">{order.tax.amount.formatted_with_symbol}</td>
                 <td role="cell">{order.order.shipping.price.formatted_with_symbol}</td>
-                <td role="cell">{symbol_total}</td>
+                <td role="cell">{order.order.total_with_tax.formatted_with_symbol}</td>
             </tr>
         </thead>
         </table>

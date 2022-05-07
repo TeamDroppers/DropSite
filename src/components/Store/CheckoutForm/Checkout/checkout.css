@@ -75,8 +75,8 @@
 
   .option{
     background: white;
-    color: #224499;
-    border: 1px solid #224499;
+    color: #269;
+    border: 1px solid #269;
     font-weight: 600;
     border-radius: 4px;
     padding: 0.5rem 0.8rem;
@@ -88,7 +88,17 @@
     cursor: pointer;
     box-shadow: 2px 2px 15px 2px #22222244;
     color: white;
-    background: #224499;
+    background: #269;
+}
+
+.checkout-order-reference{
+    color:#2299FF;
+    font-weight: bold;
+}
+
+.checkout-order-reference:hover{
+    color:#2299FF;
+    text-decoration: underline;
 }
 
 @media only screen and (max-width:1000px){

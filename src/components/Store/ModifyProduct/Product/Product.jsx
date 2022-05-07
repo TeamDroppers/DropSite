@@ -29,7 +29,7 @@ const Product = ({ product, isLoggedIn, changePrice}) => {
         clearTimeout(timeoutID);
         document.querySelector('.form-alert').classList.remove('removed');
         document.querySelector('.form-alert').textContent = msg;
-        (success) ? document.querySelector('.form-alert').style.color = "#22CCAA": document.querySelector('.form-alert').style.color = "#BB4422"
+        (success) ? document.querySelector('.form-alert').style.color = "#22AACC": document.querySelector('.form-alert').style.color = "#BB4422"
     }
 
     const handlePriceChange = (event)=>{
