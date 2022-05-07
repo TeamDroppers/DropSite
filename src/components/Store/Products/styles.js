@@ -53,7 +53,7 @@ export default makeStyles((theme) => ({
     border:'none',
     outline:'none',
     fontWeight:'bold',
-    color:'purple',
+    color:'#269',
     background:'transparent',
     cursor:'pointer',
   },

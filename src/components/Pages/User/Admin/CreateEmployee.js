@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 import '../user-form.css';
 
 const url = window.location.protocol + '' + window.location.host + '/validate/employee';
@@ -171,7 +172,7 @@ export default class UserForm extends React.Component {
                       <div className = "loader removed"></div>
                       <div className = "form-alert"></div>
                       <div className = "alt-route">
-                      <a href = "/admin/modify-employee"> Modify Existing Employee </a>
+                      <Link to={"/admin/modify-employee"}> Modify Existing Employee </Link>
                       </div>
                   </form>
               </div>

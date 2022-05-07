@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
 import { AddShoppingCart, Favorite } from '@material-ui/icons'
+import { useNavigate } from 'react-router-dom';
 import useStyles from './styles';
 import '../../../item.css'
 
 const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites}) => {
     const classes = useStyles();
-
+    const navigate = useNavigate();
     let favoriteClass = ""
     if(isFavorite)
         favoriteClass = "favorite"; 
@@ -57,7 +58,7 @@ const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites}) =>
 
   return (
     < Card className={classes.root}>
-        <CardMedia className={classes.media} image={product.image.url} title={product.name} onClick={()=>{window.location = `/product/?ref=${product.id}`}}>
+        <CardMedia className={classes.media} image={product.image.url} title={product.name} onClick={()=>{navigate(`/product/?ref=${product.id}`)}}>
             { product.inventory.available === 0 && <div className={classes.noQuantity}>
                 <h1 className={classes.noQuantityText}>
                     Out of Stock
@@ -65,7 +66,7 @@ const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites}) =>
             </div>}
         </CardMedia>
         <CardContent className={classes.cardContent}>
-            <div className={classes.itemLink} onClick={()=>{window.location = `/product/?ref=${product.id}`}}>
+            <div className={classes.itemLink} onClick={()=>{navigate(`/product/?ref=${product.id}`)}}>
                 <Typography className={classes.productName} variant = "h5" gutterBottom>
                     {product.name}
                 </Typography>

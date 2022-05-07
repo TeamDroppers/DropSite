@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import Product from './Product/Product';
 import useStyles from './styles';
 
 
 
 
-const Products = ({ commerce, products, isLoggedIn, changePrice}) => {
+const Products = ({ commerce, products, refreshProducts, isLoggedIn, changePrice}) => {
     const classes = useStyles();
     const [product, setProduct] = useState({});
     const [productDisplay, setProductDisplay] = useState(<></>);
@@ -45,7 +46,7 @@ const Products = ({ commerce, products, isLoggedIn, changePrice}) => {
     function ProductDisplay ({product}){
         return(
                 <Grid className={classes.productContainer} item key={product.id} xs={10} sm={8} md={5} lg={4} xl={3}>
-                    <Product className={classes.product} product={product} isLoggedIn={isLoggedIn} changePrice={changePrice}/>
+                    <Product className={classes.product} product={product} refreshProducts={refreshProducts} isLoggedIn={isLoggedIn} changePrice={changePrice}/>
                 </Grid>
         )
     }
@@ -53,6 +54,9 @@ const Products = ({ commerce, products, isLoggedIn, changePrice}) => {
     return(
     <>
         {title}
+        <div id="return">
+            <Link to = {`/admin/store`}>Return</Link>
+        </div>
         <main className={classes.content}>
             <div className={classes.toolbar} />
             <Grid container flexGrow = '1' justifyContent ="space-evenly" spacing={4}>

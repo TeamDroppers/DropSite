@@ -6,16 +6,37 @@ function Searchbar({products}){
     const [userQuery, setUserQuery] = useState("");
     const [searchItems, setSearchItems] = useState(<></>);
     const [isActive, setIsActive] = useState(false);
+    const [matchingProducts, setMatchingProducts] = useState([]);
 
     useEffect(()=>{
         setSearchItems(<SearchProducts/>)
     },[isActive])
 
+    useEffect(()=>{
+        CheckSearchItems();
+    },[userQuery])
+
+    useEffect(()=>{
+        setSearchItems(<SearchProducts/>)
+    },[matchingProducts])
+
     const handleUserQuery = (event)=>{
         setUserQuery(event.target.value);
-        console.log(event.target.value)
         event.preventDefault();
-        setSearchItems(<SearchProducts/>)
+    }
+
+    const containsAll = (ar1, ar2) => {
+        ar2.every(ar2Item => ar1.includes(ar2Item))
+    }
+                
+    const sameMembers = (ar1, ar2) => {
+        containsAll(ar1, ar2) && containsAll(ar2, ar1);
+    }
+
+    const CheckSearchItems = ()=>{
+        const matching = products.filter(product => (product.categories[0].slug.toLowerCase().includes(userQuery.toLowerCase()) || product.name.toLowerCase().includes(userQuery.toLowerCase())) );
+        if(!sameMembers(matching, matchingProducts))
+            setMatchingProducts(matching);
     }
 
     function SearchProducts()
@@ -23,9 +44,9 @@ function Searchbar({products}){
         return(
             <>
                 {isActive &&
-                products.map((product) => (
+                matchingProducts.map((product) => (
                     <>
-                    { product.name.toLowerCase().includes(userQuery.toLowerCase()) &&
+                    {userQuery !== "" &&
                     <SearchItem product={product}/>
                     }
                     </>
@@ -47,7 +68,7 @@ function Searchbar({products}){
     <>
         <div className = "searchbar-container" tabIndex={0} >
             <div onFocus={searchbarFocused} style={{minWidth:'80%', maxWidth:'80%'}}>
-            <input class="searchbar" type="text" name="userQuery" value={userQuery} onChange={handleUserQuery}   onBlur={searchbarNotFocused} placeholder="Search.."/>
+            <input class="searchbar" type="text" name="userQuery" value={userQuery} onChange={handleUserQuery}   onBlur={searchbarNotFocused} placeholder="Search Products.."/>
             {searchItems}
             </div>
         </div>

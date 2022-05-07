@@ -9,7 +9,7 @@ export default makeStyles(() => ({
     flex:'2',
   },
   media: {
-    position:'relative',
+    backgroundSize:'contain',
     paddingTop: '40%', // 16:9
     '&:hover': {
       cursor:'pointer'

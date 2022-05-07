@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
     
@@ -11,7 +11,7 @@ function SearchItem({product}){
     
         <div className='searchbar-item'>
             <Link className='searchbar-item-link' to={`/product/?ref=${product.id}`} onMouseDown={()=>{navigate(`/product/?ref=${product.id}`)}}>
-                <img className='searchbar-item-thumbnail' src={product.image.url} />
+                <img className='searchbar-item-thumbnail' src={product.image.url} alt='product'/>
                 <div classname='searchbar-item-info' style={{flex:1, overflow:'hidden',}}>
                     <h5>{product.name}</h5>
                     {product.inventory.available > 0 &&      

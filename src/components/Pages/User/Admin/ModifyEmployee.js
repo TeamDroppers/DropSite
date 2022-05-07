@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import Select from 'react-select'
 import axios from 'axios'
 import '../user-form.css';
 
-const url = window.location.protocol + '' + window.location.host + '/validate/employee';
+// const url = window.location.protocol + '' + window.location.host + '/validate/employee';
 const logo = 'https://media.moddb.com/images/articles/1/147/146977/Care_Package_HUD_icon_MW3.png';
 let timeoutID;
 
@@ -75,19 +76,7 @@ const modify = async (action, email, newEmail, roleAuth) =>{
   document.querySelector('.loader').classList.add('removed')
   messageTimeout();
 }
-
-const validateEmails = (email, confirm)=>{
-  if(email === confirm)
-    return true;
-  return false;
-}
-
-const validateEmail = (email) => {
-    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  };
   
-
 function ModifyEmployee(){
 
     const [role, setRole] = useState('none');
@@ -244,7 +233,7 @@ function ModifyEmployee(){
                     <div className = "loader removed"></div>
                     <div className = "form-alert"></div>
                     <div className = "alt-route">
-                        <a href = "/admin/create-employee"> Create New Employee </a>
+                        <Link to={"/admin/create-employee"}> Create New Employee </Link>
                     </div>
                 </form>
             </div>

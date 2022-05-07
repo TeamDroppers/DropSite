@@ -2,9 +2,11 @@ import React from 'react';
 import { Typography, Button, Card, CardContent, CardMedia, IconButton } from '@material-ui/core';
 import { Favorite } from '@material-ui/icons'
 import useStyles from './styles';
+import { useNavigate } from 'react-router-dom';
 
 const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, onAddToFavorites, maxQuantity }) => {
     const classes = useStyles();
+    const navigate = useNavigate();
     console.log(item);
     let favoriteClass = ""
     if(isFavorite)
@@ -38,10 +40,10 @@ const CartItem = ({ item, user, isFavorite, onUpdateCartQty, onRemoveFromCart, o
 
   return (
     <Card className={classes.itemContainer}>
-        <CardMedia image={item.image.url} alt={item.name} className={classes.media} onClick={()=>{window.location = `/product/?ref=${item.product_id}`}}/>
+        <CardMedia image={item.image.url} alt={item.name} className={classes.media} onClick={()=>{navigate(`/product/?ref=${item.product_id}`)}}/>
         <CardContent className={classes.cardContent}>
             <Typography  variant="h4"> {item.name}</Typography>
-            <Typography className={classes.productPrice} variant="h5" onClick={()=>{window.location = `/product/?ref=${item.product_id}`}}> {item.line_total.formatted_with_symbol} </Typography>    
+            <Typography className={classes.productPrice} variant="h5" onClick={()=>{navigate(`/product/?ref=${item.product_id}`)}}> {item.line_total.formatted_with_symbol} </Typography>    
         </CardContent>
         <div className={classes.cartActions}>
             <div className={classes.buttons}>

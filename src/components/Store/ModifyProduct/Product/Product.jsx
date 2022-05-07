@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
+import { Card, CardMedia, CardContent, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import '../../../item.css'
 
 
-const Product = ({ product, isLoggedIn, changePrice}) => {
+const Product = ({ product, refreshProducts, isLoggedIn, changePrice}) => {
     const classes = useStyles();
     const [price, setPrice] = useState(product.price.raw);
     const [quantity, setQuantity] = useState(product.inventory.available);
@@ -19,12 +19,6 @@ const Product = ({ product, isLoggedIn, changePrice}) => {
         }, 3000)
       }
       
-    const successTimeout = ()=>{
-        timeoutID = setTimeout(() => {
-            window.location.reload(false)
-        }, 3000)
-    }
-
     const updateAlert = (msg, success)=>{
         clearTimeout(timeoutID);
         document.querySelector('.form-alert').classList.remove('removed');
@@ -62,7 +56,7 @@ const Product = ({ product, isLoggedIn, changePrice}) => {
         const updatedProduct= await changePrice(data)//.then(()=>{window.location.reload(false)});
         if(updatedProduct.success){
             updateAlert('Product Updated!', true);
-            successTimeout()
+            refreshProducts();
         }
         else
         {

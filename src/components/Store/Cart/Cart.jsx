@@ -1,11 +1,13 @@
 import React from 'react';
-import { Container, Typography, Button, Grid } from '@material-ui/core'
+import { Container, Typography, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import useStyles from './styles';
 import CartItem from './CartItem/CartItem';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = ({ cart, products, user, favorites, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart, handleAddToFavorites }) => {
     const classes= useStyles();
+    const navigate = useNavigate();
     const EmptyCart = () =>(
         <Typography variant="subtitle1"> You have no items in your shopping cart!
         <Link to="/"className={classes.link}> Add some!</Link>
@@ -13,14 +15,14 @@ const Cart = ({ cart, products, user, favorites, handleUpdateCartQty, handleRemo
     ) 
     
         const handleCheckout = ()=>{
-            window.location = '/checkout';
+            navigate('/checkout');
         }
 
         const validateItem = (item)=>{
             if(products.length === 0) return;
             for (const product of products) {
-                console.log(product.id);
-                console.log(item.product_id)
+                // console.log(product.id);
+                // console.log(item.product_id)
                 if(product.id.normalize() === item.product_id.normalize()){
                     if(product.inventory.available > 0)
                         return true;

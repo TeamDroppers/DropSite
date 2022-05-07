@@ -35,4 +35,26 @@ export default makeStyles((theme) => ({
     marginRight:'2rem',
     alignSelf:'center',
   },
+  filter:{
+
+    padding:'20px',
+    height:'100px',
+    fontSize:'20px',
+    fontWeight:'bold',
+    marginBottom:'2rem',
+    display: 'flex',
+    gap:'2rem',
+    flexDirection:'column',
+    alignItems:'center',
+  },
+  select:{
+    width:'150px',
+    padding:'0 0 0 10px',
+    border:'none',
+    outline:'none',
+    fontWeight:'bold',
+    color:'#269',
+    background:'transparent',
+    cursor:'pointer',
+  },
 }));

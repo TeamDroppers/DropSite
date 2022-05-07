@@ -14,7 +14,7 @@ const Orders = ({user, getOrders}) => {
     
     useEffect(() => {
         if(user && user.role >= 2){
-            getOrders(limit, page).then((orders)=>{setTotalOrders(orders.meta.pagination.total); if(orders.meta.pagination.total == 0) return; console.log(orders.data); setOrders(orders.data); })
+            getOrders(limit, page).then((orders)=>{setTotalOrders(orders.meta.pagination.total); if(orders.meta.pagination.total === 0) return; console.log(orders.data); setOrders(orders.data); })
         }
         else
         setOrders([]);
@@ -41,7 +41,7 @@ const Orders = ({user, getOrders}) => {
         else{
         updatePageOptions();
         updateLimitOptions();
-        getOrders(limit, page).then((orders)=>{setTotalOrders(orders.meta.pagination.total); if(orders.meta.pagination.total == 0) return; console.log(orders.data); setOrders(orders.data);})
+        getOrders(limit, page).then((orders)=>{setTotalOrders(orders.meta.pagination.total); if(orders.meta.pagination.total === 0) return; console.log(orders.data); setOrders(orders.data);})
         }
     }, [limit, page, totalOrders])
 

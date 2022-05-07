@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { signUserOut, userInfo } from '../utilites';
+import { signUserOut } from '../utilites';
 import { IconButton, Badge } from "@material-ui/core";
 import { ShoppingCart, Favorite } from '@material-ui/icons';
 import PersonIcon from '@mui/icons-material/Person';
@@ -23,7 +23,6 @@ function Nav({totalItems, user, products}){
 
     // const classes = useStyles();
     const location = useLocation();
-    const [isLoading, setLoading] = useState(true);
     const [userLink, setUserLinks] = useState(<></>);
     const [userNavFavorite, setNavUserFavorite] = useState(<></>);
     const [userSideFavorite, setSideUserFavorite] = useState(<></>);
@@ -34,8 +33,7 @@ function Nav({totalItems, user, products}){
         }, [user])
 
     const fetchUser = async()=>{
-        if(user && user.success === true || user.success === false){
-                setLoading(false);
+        if( (user && user.success === true) || user.success === false){
 
             if(user.isLoggedIn){                
                 setLoginButton(<LogoutButton/>);
@@ -126,7 +124,7 @@ function Nav({totalItems, user, products}){
                         <li className = "nav-link">Contact</li>
                     </Link>
                     {userLink}
-                    { (location.pathname === '/store' || location.pathname === '/cart' || location.pathname === '/favorites' || location.pathname === '/product/') && (
+                    { (location.pathname === '/store' || location.pathname === '/admin/store' || location.pathname === '/cart' || location.pathname === '/favorites' || location.pathname === '/product/') && (
                     <>
                         <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
                             <Badge className = "nav-link" badgeContent={totalItems} color="secondary">
@@ -168,7 +166,7 @@ function Nav({totalItems, user, products}){
                         }} >&#8801;</button>
                 </div>
             </nav>
-            { location.pathname === '/store' && (
+            { (location.pathname === '/store'  || location.pathname === '/admin/store') && (
                     <Searchbar products={products}/>
             )}
             <nav className = "sidemenu " id ="sidemenu" >

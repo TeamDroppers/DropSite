@@ -170,16 +170,8 @@ const App = () => {
             </>
             }
             />
-            <Route exact path="/modify-product" element=
-            {
-            <>
-            <ModifyProduct commerce={commerce}
-            products={products}
-            user={user}
-            changePrice={changeProductPrice}/>
-            </>
-            }
-            />
+            <Route exact path="/modify-product" 
+            element={<> <ModifyProduct commerce={commerce} products={products} user={user} refreshProducts={fetchProducts} changePrice={changeProductPrice}/> </>}/>
             <Route exact path="/favorites" element=
             {<Favorites favorites={favorites}
             onAddToCart={handleAddToCart}

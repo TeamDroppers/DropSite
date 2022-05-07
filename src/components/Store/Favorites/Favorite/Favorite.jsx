@@ -1,14 +1,15 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
 import { AddShoppingCart, Favorite } from '@material-ui/icons'
-
+import { useNavigate } from 'react-router-dom';
 import useStyles from './styles';
 
 const FavoriteItem = ({ favorite, onAddToCart, onAddToFavorites }) => {
     const classes = useStyles();
+    const navigate = useNavigate();
   return (
     < Card className={classes.root}>
-        <CardMedia className={classes.media} image={favorite.image.url} title={favorite.name} onClick={()=>{window.location = `/product/?ref=${favorite.id}`}}>
+        <CardMedia className={classes.media} image={favorite.image.url} title={favorite.name} onClick={()=>{navigate(`/product/?ref=${favorite.id}`)}}>
             { favorite.inventory.available === 0 && <div className={classes.noQuantity}>
                 <h1 className={classes.noQuantityText}>
                     Out of Stock
@@ -17,7 +18,7 @@ const FavoriteItem = ({ favorite, onAddToCart, onAddToFavorites }) => {
         </CardMedia>
         <CardContent className={classes.cardContent}>
             <Typography variant="h4">{favorite.name}</Typography>
-            <Typography className={classes.productPrice} variant = "h5" onClick={()=>{window.location = `/product/?ref=${favorite.id}`}}>
+            <Typography className={classes.productPrice} variant = "h5" onClick={()=>{navigate(`/product/?ref=${favorite.id}`)}}>
                 {favorite.price.formatted_with_symbol}
             </Typography> 
         </CardContent>

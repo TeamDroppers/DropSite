@@ -18,10 +18,10 @@ const Orders = ({user, getOrdersWithParams, isOrderById}) => {
 
             if(isOrderById) {
                 const orderReference = new URLSearchParams(params).get('ref');
-                getOrdersWithParams({"query":orderReference}).then((orders)=>{setLoading(false); if(orders.meta.pagination.total == 0) return; setOrders(orders.data); })
+                getOrdersWithParams({"query":orderReference}).then((orders)=>{setLoading(false); if(orders.meta.pagination.total === 0) return; setOrders(orders.data); })
             }
             else
-                getOrdersWithParams({"query":user.email}).then((orders)=>{setLoading(false); if(orders.meta.pagination.total == 0) return; setOrders(orders.data); })
+                getOrdersWithParams({"query":user.email}).then((orders)=>{setLoading(false); if(orders.meta.pagination.total === 0) return; setOrders(orders.data); })
         }
         else
         setOrders([]);
@@ -45,7 +45,7 @@ const Orders = ({user, getOrdersWithParams, isOrderById}) => {
     function DisplayOrderById(){
         return(
             <>
-            {orders.length == 1 &&
+            {orders.length === 1 &&
                 <div className="order-container" xs={10} sm={8} md={5} lg={4} xl={3}>
                     <OrderById order={orders[0]}/>
                 </div>

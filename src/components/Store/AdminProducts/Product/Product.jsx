@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
 import { AddShoppingCart, Favorite } from '@material-ui/icons'
+import { useNavigate } from "react-router-dom";
 import useStyles from './styles';
 import '../../../item.css'
 
 const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites, adminView, guestView, customerView}) => {
     const classes = useStyles();
+    const navigate = useNavigate();
     const [adminRender, setAdminRender] = useState(<></>);
     const [customerRender, setCustomerRender] = useState(<></>);
     const [guestRender, setGuestRender] = useState(<></>);
@@ -78,7 +80,7 @@ const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites, adm
         return(
             <>
             {user.role >=2 && 
-            <button id="adminView" className = {classes.modifyButton} onClick={()=>{window.location = `/modify-product/?ref=${product.id}`}}>Modify</button>
+            <button id="adminView" className = {classes.modifyButton} onClick={()=>{navigate(`/modify-product/?ref=${product.id}`)}}>Modify</button>
             }
             </>
         );
@@ -86,7 +88,7 @@ const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites, adm
 
   return (
     < Card className={classes.root}>
-        <CardMedia className={classes.media} image={product.image.url} title={product.name} onClick={()=>{window.location = `/product/?ref=${product.id}`}}>
+        <CardMedia className={classes.media} image={product.image.url} title={product.name} onClick={()=>{navigate(`/modify-product/?ref=${product.id}`)}}>
             { product.inventory.available === 0 && <div className={classes.noQuantity}>
                 <h1 className={classes.noQuantityText}>
                     Out of Stock
@@ -94,7 +96,7 @@ const Product = ({ product, user, isFavorite, onAddToCart, onAddToFavorites, adm
             </div>}
         </CardMedia>
         <CardContent className={classes.cardContent}>
-            <div className={classes.itemLink} onClick={()=>{window.location = `/product/?ref=${product.id}`}}>
+            <div className={classes.itemLink} onClick={()=>{navigate(`/modify-product/?ref=${product.id}`)}}>
                 <Typography className={classes.productName} variant = "h5" gutterBottom>
                     {product.name}
                 </Typography>

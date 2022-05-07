@@ -1,6 +1,5 @@
 import React from 'react';
 import '../orders.css'
-import { Link } from 'react-router-dom';
 import LineItem from './LineItem/LineItem';
 
 const OrderById = ({ order }) => {
@@ -15,8 +14,6 @@ console.log(order);
                 <tr role="row">
                     <th scope="col" role="columnheader" className='th-half'>Product</th>
                     <th scope="col" role="columnheader" className='th-half'>Quanitity</th>
-                    {/* <th scope="col" role="columnheader" > Fulfillment Status</th>
-                    <th scope="col" role="columnheader" >Total</th> */}
                 </tr>
             </thead>
             <thead role="rolegorup">

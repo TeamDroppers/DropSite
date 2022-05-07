@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 import './user-form.css';
 
 const url = window.location.protocol + '' + window.location.host + '/reset'
@@ -83,7 +84,7 @@ export default class UserForm extends React.Component {
                       <div className = "loader removed"></div>
                       <div className = "form-alert"></div>
                       <div className = "alt-route">
-                      <a href = "/login"> Return to Login </a>
+                      <Link to={"/login"}> Return to login </Link>
                       </div>
                   </form>
               </div>

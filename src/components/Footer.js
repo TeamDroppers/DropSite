@@ -1,8 +1,7 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import Creditcard from "@mui/icons-material/CreditCard";
@@ -23,23 +22,23 @@ function Footer() {
               {/* <ConnectWithoutContactIcon /> */}
   
               <div>
-                <a href="https://twitter.com" target="_blank">
+                <a href="https://twitter.com" target="_blank" rel="noreferrer">
                   <TwitterIcon />
                 </a>
               </div>
               <div>
-                <a href="https://www.instagram.com" target="_blank">
+                <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
                   <InstagramIcon />
                 </a>
               </div>
               <div>
-                <a href="https://www.facebook.com/login.php" target="_blank">
+                <a href="https://www.facebook.com/login.php" target="_blank" rel="noreferrer">
                   <FacebookIcon />
                 </a>
               </div>
   
               <div>
-                <a href="https://www.pinterest.com/login" target="_blank">
+                <a href="https://www.pinterest.com/login" target="_blank" rel="noreferrer">
                   <PinterestIcon />
                 </a>
               </div>
@@ -54,7 +53,7 @@ function Footer() {
                 <Link to="/cart">Cart</Link>
               </div>           
               <div>
-                <Link to="/cart">FAQ</Link>
+                <Link to="/faq">FAQ</Link>
               </div>
               <div>
                 <Link to="/about">About</Link>
@@ -90,12 +89,9 @@ function Footer() {
     );
   }
 
-  const location = useLocation();
 
   return (
     <>
-      {/* {location.pathname !== '/' && <Foot/>}
-      {location.pathname === '/' && <></>} */}
       <Foot/>
     </>
   );
